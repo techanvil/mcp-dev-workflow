@@ -31,7 +31,19 @@ class GitHubMCPServer {
       auth: process.env.GITHUB_TOKEN, // Optional for public repos
     });
 
+    // Set default repository from environment variables
+    this.defaultOwner = process.env.DEFAULT_GITHUB_OWNER;
+    this.defaultRepo = process.env.DEFAULT_GITHUB_REPO;
+
     this.setupToolHandlers();
+  }
+
+  // Helper method to resolve owner and repo with defaults
+  resolveRepository(args) {
+    return {
+      owner: args.owner || this.defaultOwner,
+      repo: args.repo || this.defaultRepo,
+    };
   }
 
   setupToolHandlers() {
@@ -46,18 +58,20 @@ class GitHubMCPServer {
               properties: {
                 owner: {
                   type: "string",
-                  description: "Repository owner",
+                  description:
+                    "Repository owner (optional, uses default if not provided)",
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name",
+                  description:
+                    "Repository name (optional, uses default if not provided)",
                 },
                 issue_number: {
                   type: "number",
                   description: "Issue number",
                 },
               },
-              required: ["owner", "repo", "issue_number"],
+              required: ["issue_number"],
             },
           },
           {
@@ -68,18 +82,20 @@ class GitHubMCPServer {
               properties: {
                 owner: {
                   type: "string",
-                  description: "Repository owner",
+                  description:
+                    "Repository owner (optional, uses default if not provided)",
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name",
+                  description:
+                    "Repository name (optional, uses default if not provided)",
                 },
                 pr_number: {
                   type: "number",
                   description: "Pull request number",
                 },
               },
-              required: ["owner", "repo", "pr_number"],
+              required: ["pr_number"],
             },
           },
           {
@@ -90,11 +106,13 @@ class GitHubMCPServer {
               properties: {
                 owner: {
                   type: "string",
-                  description: "Repository owner",
+                  description:
+                    "Repository owner (optional, uses default if not provided)",
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name",
+                  description:
+                    "Repository name (optional, uses default if not provided)",
                 },
                 state: {
                   type: "string",
@@ -113,7 +131,7 @@ class GitHubMCPServer {
                   default: 1,
                 },
               },
-              required: ["owner", "repo"],
+              required: [],
             },
           },
           {
@@ -124,11 +142,13 @@ class GitHubMCPServer {
               properties: {
                 owner: {
                   type: "string",
-                  description: "Repository owner",
+                  description:
+                    "Repository owner (optional, uses default if not provided)",
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name",
+                  description:
+                    "Repository name (optional, uses default if not provided)",
                 },
                 state: {
                   type: "string",
@@ -147,7 +167,7 @@ class GitHubMCPServer {
                   default: 1,
                 },
               },
-              required: ["owner", "repo"],
+              required: [],
             },
           },
           {
@@ -158,11 +178,13 @@ class GitHubMCPServer {
               properties: {
                 owner: {
                   type: "string",
-                  description: "Repository owner",
+                  description:
+                    "Repository owner (optional, uses default if not provided)",
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name",
+                  description:
+                    "Repository name (optional, uses default if not provided)",
                 },
                 query: {
                   type: "string",
@@ -180,7 +202,7 @@ class GitHubMCPServer {
                   default: 30,
                 },
               },
-              required: ["owner", "repo", "query"],
+              required: ["query"],
             },
           },
         ],
@@ -218,7 +240,16 @@ class GitHubMCPServer {
     });
   }
 
-  async getIssue({ owner, repo, issue_number }) {
+  async getIssue(args) {
+    const { owner, repo } = this.resolveRepository(args);
+    const { issue_number } = args;
+
+    if (!owner || !repo) {
+      throw new Error(
+        "Repository owner and name must be provided either as parameters or in defaults"
+      );
+    }
+
     const response = await this.octokit.rest.issues.get({
       owner,
       repo,
@@ -252,7 +283,16 @@ ${issue.comments} comment(s)`,
     };
   }
 
-  async getPullRequest({ owner, repo, pr_number }) {
+  async getPullRequest(args) {
+    const { owner, repo } = this.resolveRepository(args);
+    const { pr_number } = args;
+
+    if (!owner || !repo) {
+      throw new Error(
+        "Repository owner and name must be provided either as parameters or in defaults"
+      );
+    }
+
     const response = await this.octokit.rest.pulls.get({
       owner,
       repo,
@@ -291,7 +331,16 @@ ${pr.body || "No description provided."}
     };
   }
 
-  async listIssues({ owner, repo, state = "open", per_page = 30, page = 1 }) {
+  async listIssues(args) {
+    const { owner, repo } = this.resolveRepository(args);
+    const { state = "open", per_page = 30, page = 1 } = args;
+
+    if (!owner || !repo) {
+      throw new Error(
+        "Repository owner and name must be provided either as parameters or in defaults"
+      );
+    }
+
     const response = await this.octokit.rest.issues.listForRepo({
       owner,
       repo,
@@ -329,13 +378,16 @@ ${
     };
   }
 
-  async listPullRequests({
-    owner,
-    repo,
-    state = "open",
-    per_page = 30,
-    page = 1,
-  }) {
+  async listPullRequests(args) {
+    const { owner, repo } = this.resolveRepository(args);
+    const { state = "open", per_page = 30, page = 1 } = args;
+
+    if (!owner || !repo) {
+      throw new Error(
+        "Repository owner and name must be provided either as parameters or in defaults"
+      );
+    }
+
     const response = await this.octokit.rest.pulls.list({
       owner,
       repo,
@@ -374,7 +426,16 @@ ${
     };
   }
 
-  async searchIssues({ owner, repo, query, type = "both", per_page = 30 }) {
+  async searchIssues(args) {
+    const { owner, repo } = this.resolveRepository(args);
+    const { query, type = "both", per_page = 30 } = args;
+
+    if (!owner || !repo) {
+      throw new Error(
+        "Repository owner and name must be provided either as parameters or in defaults"
+      );
+    }
+
     let searchQuery = `repo:${owner}/${repo} ${query}`;
 
     if (type === "issue") {

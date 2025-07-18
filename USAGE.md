@@ -12,6 +12,38 @@ This guide provides practical examples and use cases for the GitHub MCP server t
 | `list_github_prs`      | Browse repository PRs        | Monitoring reviews, checking status                   |
 | `search_github_issues` | Search issues/PRs by keyword | Finding related work, research                        |
 
+## 🎯 Default Repository Configuration
+
+This server is configured with a **default repository** (`google/site-kit-wp`), which means you can refer to issues and PRs by number alone without specifying the owner and repo each time.
+
+### 📋 Simplified Syntax Examples
+
+**Using defaults (recommended for site-kit-wp):**
+
+- "Show me issue 10988" → Uses default `google/site-kit-wp`
+- "Get PR 1234" → Uses default `google/site-kit-wp`
+- "List recent issues" → Uses default `google/site-kit-wp`
+- "Search for storybook issues" → Uses default `google/site-kit-wp`
+
+**Override defaults for other repositories:**
+
+- "Show me issue 123 from microsoft/vscode"
+- "List PRs from facebook/react"
+- "Search for bug in owner=angular, repo=angular"
+
+### 🔧 Configuration
+
+The default repository is set in the MCP configuration:
+
+```json
+"env": {
+  "DEFAULT_GITHUB_OWNER": "google",
+  "DEFAULT_GITHUB_REPO": "site-kit-wp"
+}
+```
+
+To change defaults, update these values in `cursor-mcp-config.json` and restart Cursor.
+
 ## 💬 Natural Language Usage
 
 The beauty of MCP tools is that you can interact with them using **natural language** rather than technical commands. When chatting with an AI assistant like Cursor, simply describe what you want to do and the AI will translate your request into the appropriate tool calls.
@@ -22,29 +54,29 @@ Instead of technical tool calls, you can say:
 
 **Getting Issues:**
 
-- "Show me issue 10988 from google/site-kit-wp"
-- "What's the details on site-kit-wp issue #11117?"
-- "Get me the information about issue 10988"
+- "Show me issue 10988" (uses default repo)
+- "What's the details on issue 11117?" (uses default repo)
+- "Get me the information about issue 10988 from google/site-kit-wp" (explicit repo)
 
 **Browsing Issues/PRs:**
 
-- "List the recent open issues from site-kit-wp"
-- "Show me the latest 5 pull requests from google/site-kit-wp"
-- "What are the current open issues in the site-kit-wp repo?"
-- "Give me a list of closed PRs from the last week"
+- "List the recent open issues" (uses default repo)
+- "Show me the latest 5 pull requests" (uses default repo)
+- "What are the current open issues?" (uses default repo)
+- "Give me a list of closed PRs from google/site-kit-wp" (explicit repo)
 
 **Searching:**
 
-- "Search for storybook-related issues in site-kit-wp"
-- "Find any issues about 'dashboard sharing' in google/site-kit-wp"
-- "Look for P1 priority issues in the site-kit-wp repository"
-- "Search for pull requests related to 'inline data'"
+- "Search for storybook-related issues" (uses default repo)
+- "Find any issues about 'dashboard sharing'" (uses default repo)
+- "Look for P1 priority issues" (uses default repo)
+- "Search for pull requests related to 'inline data' in facebook/react" (explicit repo)
 
 **Getting PRs:**
 
-- "Show me pull request 1234 from site-kit-wp"
-- "Get details on the latest PR from google/site-kit-wp"
-- "What changes are in PR #1234?"
+- "Show me pull request 1234" (uses default repo)
+- "Get details on the latest PR" (uses default repo)
+- "What changes are in PR #1234?" (uses default repo)
 
 ### 🎯 Conversation Tips
 
@@ -95,6 +127,15 @@ Just **describe what you want** and let the AI handle the technical details!
 
 **Use Case:** You want to understand a specific issue mentioned in discussions or code comments.
 
+**Simplified (uses default repo):**
+
+```
+get_github_issue with:
+- issue_number: 10988
+```
+
+**Full syntax (for other repos):**
+
 ```
 get_github_issue with:
 - owner: "google"
@@ -118,6 +159,15 @@ get_github_issue with:
 
 **Use Case:** Understanding what changes a PR introduces before reviewing or merging.
 
+**Simplified (uses default repo):**
+
+```
+get_github_pr with:
+- pr_number: 1234
+```
+
+**Full syntax (for other repos):**
+
 ```
 get_github_pr with:
 - owner: "google"
@@ -140,6 +190,16 @@ get_github_pr with:
 ### 3. Browsing Recent Issues
 
 **Use Case:** Getting an overview of current work or finding issues to work on.
+
+**Simplified (uses default repo):**
+
+```
+list_github_issues with:
+- state: "open"
+- per_page: 10
+```
+
+**Full syntax (for other repos):**
 
 ```
 list_github_issues with:

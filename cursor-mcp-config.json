@@ -3,10 +3,12 @@
     "github-dev-workflow": {
       "command": "node",
       "args": [
-        "/home/snarf/git/techanvil/mcp-dev-workflow/servers/github/index.js"
+        "/home/tom/git/techanvil/mcp-dev-workflow/servers/github/index.js"
       ],
       "env": {
-        "GITHUB_TOKEN": ""
+        "GITHUB_TOKEN": "",
+        "DEFAULT_GITHUB_OWNER": "google",
+        "DEFAULT_GITHUB_REPO": "site-kit-wp"
       }
     }
   }
