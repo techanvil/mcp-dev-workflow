@@ -1,4 +1,5 @@
 # Set up scalable MCP server for GitHub
+
 _Exported on 7/18/2025 at 14:21:34 GMT+1 from Cursor (1.1.3)_
 
 ---
@@ -7,7 +8,7 @@ _Exported on 7/18/2025 at 14:21:34 GMT+1 from Cursor (1.1.3)_
 
 I want to create an MCP server that will allow Cursor to read issues and PRs from @https://github.com/google/site-kit-wp/issues/10988 . I don't want to use the built-in GitHub integration because it will take too long to get approval for access.
 
-I've created the `dev-workflow-mcp` as a stub to build this in. I would also like to add more MCP servers as time goes on so let's make it scalable.  @README.md 
+I've created the `dev-workflow-mcp` as a stub to build this in. I would also like to add more MCP servers as time goes on so let's make it scalable. @README.md
 
 ---
 
@@ -93,7 +94,7 @@ class GitHubMCPServer {
                   description: "Repository owner",
                 },
                 repo: {
-                  type: "string", 
+                  type: "string",
                   description: "Repository name",
                 },
                 issue_number: {
@@ -116,7 +117,7 @@ class GitHubMCPServer {
                 },
                 repo: {
                   type: "string",
-                  description: "Repository name", 
+                  description: "Repository name",
                 },
                 pr_number: {
                   type: "number",
@@ -152,7 +153,7 @@ class GitHubMCPServer {
                   default: 30,
                 },
                 page: {
-                  type: "number", 
+                  type: "number",
                   description: "Page number",
                   default: 1,
                 },
@@ -187,7 +188,7 @@ class GitHubMCPServer {
                 },
                 page: {
                   type: "number",
-                  description: "Page number", 
+                  description: "Page number",
                   default: 1,
                 },
               },
@@ -270,7 +271,7 @@ class GitHubMCPServer {
     });
 
     const issue = response.data;
-    
+
     return {
       content: [
         {
@@ -287,7 +288,7 @@ class GitHubMCPServer {
 ${issue.body || "No description provided."}
 
 ## Labels
-${issue.labels.map(label => `- ${label.name}`).join('\n') || "No labels"}
+${issue.labels.map((label) => `- ${label.name}`).join("\n") || "No labels"}
 
 ## Comments
 ${issue.comments} comment(s)`,
@@ -304,7 +305,7 @@ ${issue.comments} comment(s)`,
     });
 
     const pr = response.data;
-    
+
     return {
       content: [
         {
@@ -344,27 +345,42 @@ ${pr.body || "No description provided."}
       page,
     });
 
-    const issues = response.data.filter(item => !item.pull_request); // Filter out PRs
-    
+    const issues = response.data.filter((item) => !item.pull_request); // Filter out PRs
+
     return {
       content: [
         {
           type: "text",
           text: `# Issues for ${owner}/${repo} (${state})
 
-${issues.map(issue => 
-  `## #${issue.number}: ${issue.title}
-**State:** ${issue.state} | **Author:** ${issue.user.login} | **Created:** ${new Date(issue.created_at).toLocaleDateString()}
+${issues
+  .map(
+    (issue) =>
+      `## #${issue.number}: ${issue.title}
+**State:** ${issue.state} | **Author:** ${
+        issue.user.login
+      } | **Created:** ${new Date(issue.created_at).toLocaleDateString()}
 **URL:** ${issue.html_url}
-${issue.body ? issue.body.substring(0, 200) + (issue.body.length > 200 ? '...' : '') : 'No description'}
+${
+  issue.body
+    ? issue.body.substring(0, 200) + (issue.body.length > 200 ? "..." : "")
+    : "No description"
+}
 ---`
-).join('\n\n')}`,
+  )
+  .join("\n\n")}`,
         },
       ],
     };
   }
 
-  async listPullRequests({ owner, repo, state = "open", per_page = 30, page = 1 }) {
+  async listPullRequests({
+    owner,
+    repo,
+    state = "open",
+    per_page = 30,
+    page = 1,
+  }) {
     const response = await this.octokit.rest.pulls.list({
       owner,
       repo,
@@ -374,21 +390,30 @@ ${issue.body ? issue.body.substring(0, 200) + (issue.body.length > 200 ? '...' :
     });
 
     const prs = response.data;
-    
+
     return {
       content: [
         {
           type: "text",
           text: `# Pull Requests for ${owner}/${repo} (${state})
 
-${prs.map(pr => 
-  `## #${pr.number}: ${pr.title}
-**State:** ${pr.state} | **Author:** ${pr.user.login} | **Created:** ${new Date(pr.created_at).toLocaleDateString()}
+${prs
+  .map(
+    (pr) =>
+      `## #${pr.number}: ${pr.title}
+**State:** ${pr.state} | **Author:** ${pr.user.login} | **Created:** ${new Date(
+        pr.created_at
+      ).toLocaleDateString()}
 **Base:** ${pr.base.ref} ← **Head:** ${pr.head.ref}
 **URL:** ${pr.html_url}
-${pr.body ? pr.body.substring(0, 200) + (pr.body.length > 200 ? '...' : '') : 'No description'}
+${
+  pr.body
+    ? pr.body.substring(0, 200) + (pr.body.length > 200 ? "..." : "")
+    : "No description"
+}
 ---`
-).join('\n\n')}`,
+  )
+  .join("\n\n")}`,
         },
       ],
     };
@@ -396,7 +421,7 @@ ${pr.body ? pr.body.substring(0, 200) + (pr.body.length > 200 ? '...' : '') : 'N
 
   async searchIssues({ owner, repo, query, type = "both", per_page = 30 }) {
     let searchQuery = `repo:${owner}/${repo} ${query}`;
-    
+
     if (type === "issue") {
       searchQuery += " is:issue";
     } else if (type === "pr") {
@@ -409,7 +434,7 @@ ${pr.body ? pr.body.substring(0, 200) + (pr.body.length > 200 ? '...' : '') : 'N
     });
 
     const items = response.data.items;
-    
+
     return {
       content: [
         {
@@ -418,14 +443,23 @@ ${pr.body ? pr.body.substring(0, 200) + (pr.body.length > 200 ? '...' : '') : 'N
 
 Found ${response.data.total_count} total results (showing ${items.length})
 
-${items.map(item => 
-  `## #${item.number}: ${item.title}
-**Type:** ${item.pull_request ? 'Pull Request' : 'Issue'} | **State:** ${item.state} | **Author:** ${item.user.login}
+${items
+  .map(
+    (item) =>
+      `## #${item.number}: ${item.title}
+**Type:** ${item.pull_request ? "Pull Request" : "Issue"} | **State:** ${
+        item.state
+      } | **Author:** ${item.user.login}
 **Created:** ${new Date(item.created_at).toLocaleDateString()}
 **URL:** ${item.html_url}
-${item.body ? item.body.substring(0, 200) + (item.body.length > 200 ? '...' : '') : 'No description'}
+${
+  item.body
+    ? item.body.substring(0, 200) + (item.body.length > 200 ? "..." : "")
+    : "No description"
+}
 ---`
-).join('\n\n')}`,
+  )
+  .join("\n\n")}`,
         },
       ],
     };
@@ -464,7 +498,7 @@ GITHUB_TOKEN=your_github_token_here
       "capabilities": ["tools"],
       "tools": [
         "get_github_issue",
-        "get_github_pr", 
+        "get_github_pr",
         "list_github_issues",
         "list_github_prs",
         "search_github_issues"
@@ -486,7 +520,7 @@ GITHUB_TOKEN=your_github_token_here
 }
 ```
 
-```markdown
+````markdown
 # Dev Workflow MCP
 
 A collection of Model Context Protocol (MCP) servers for development workflow tools. This project provides MCP servers that enable AI assistants like Cursor to interact with development tools and services.
@@ -494,9 +528,11 @@ A collection of Model Context Protocol (MCP) servers for development workflow to
 ## Available Servers
 
 ### GitHub MCP Server
+
 Provides tools for reading GitHub issues, pull requests, and repository information from any public repository.
 
 **Features:**
+
 - Get detailed information about specific issues or PRs
 - List issues and pull requests with filtering
 - Search issues and PRs within repositories
@@ -504,8 +540,9 @@ Provides tools for reading GitHub issues, pull requests, and repository informat
 - Optional GitHub token support for private repositories and higher rate limits
 
 **Tools:**
+
 - `get_github_issue` - Get details of a specific GitHub issue
-- `get_github_pr` - Get details of a specific GitHub pull request  
+- `get_github_pr` - Get details of a specific GitHub pull request
 - `list_github_issues` - List issues from a GitHub repository
 - `list_github_prs` - List pull requests from a GitHub repository
 - `search_github_issues` - Search issues and PRs in a GitHub repository
@@ -513,17 +550,21 @@ Provides tools for reading GitHub issues, pull requests, and repository informat
 ## Installation
 
 1. Clone this repository:
+
 ```bash
 git clone <repository-url>
 cd dev-workflow-mcp
 ```
+````
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. (Optional) Set up environment variables:
+
 ```bash
 cp env.example .env
 # Edit .env and add your GitHub token if needed
@@ -534,12 +575,13 @@ cp env.example .env
 ### Setting up GitHub Token (Optional)
 
 For public repositories, no authentication is required. However, setting up a GitHub token provides:
+
 - Higher rate limits
 - Access to private repositories
 - Better performance
 
 1. Go to [GitHub Settings > Personal Access Tokens](https://github.com/settings/tokens)
-2. Click "Generate new token" 
+2. Click "Generate new token"
 3. For public repos: No scopes needed
 4. For private repos: Select `repo` scope
 5. Copy the token and add it to your `.env` file
@@ -565,16 +607,18 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 ## Usage Examples
 
 ### Getting a Specific Issue
+
 ```javascript
 // Tool: get_github_issue
 {
   "owner": "google",
-  "repo": "site-kit-wp", 
+  "repo": "site-kit-wp",
   "issue_number": 10988
 }
 ```
 
 ### Listing Recent Issues
+
 ```javascript
 // Tool: list_github_issues
 {
@@ -586,10 +630,11 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 ```
 
 ### Searching for Issues
+
 ```javascript
 // Tool: search_github_issues
 {
-  "owner": "google", 
+  "owner": "google",
   "repo": "site-kit-wp",
   "query": "storybook dependencies",
   "type": "both"
@@ -601,6 +646,7 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 ### Running Servers Locally
 
 To test the GitHub server:
+
 ```bash
 npm run start:github
 ```
@@ -616,6 +662,7 @@ npm run start:github
 ### Server Structure
 
 Each server should follow this structure:
+
 ```
 servers/
 ├── your-server/
@@ -627,21 +674,27 @@ servers/
 ## Troubleshooting
 
 ### Rate Limiting
+
 GitHub API has rate limits:
+
 - **Unauthenticated**: 60 requests per hour
 - **Authenticated**: 5,000 requests per hour
 
 If you hit rate limits, add a GitHub token to your environment.
 
 ### Connection Issues
+
 If the MCP server fails to connect:
+
 1. Ensure all dependencies are installed (`npm install`)
 2. Check that Node.js version is compatible (Node 18+ recommended)
 3. Verify the server path in your MCP configuration
 4. Check the server logs for specific error messages
 
 ### GitHub API Errors
+
 Common GitHub API issues:
+
 - **404 Not Found**: Repository doesn't exist or is private (add token if private)
 - **403 Forbidden**: Rate limit exceeded or insufficient permissions
 - **422 Unprocessable Entity**: Invalid parameters in the request
@@ -657,60 +710,68 @@ Common GitHub API issues:
 ## License
 
 MIT License - see LICENSE file for details
-```
+
+````
 
 ```json
 {
   "mcpServers": {
     "github-dev-workflow": {
       "command": "node",
-      "args": ["/home/snarf/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
+      "args": ["/home/tom/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
       "env": {
         "GITHUB_TOKEN": ""
       }
     }
   }
 }
-```
+````
 
 ```javascript
 #!/usr/bin/env node
 
 // Simple test to verify the GitHub MCP server tools are working
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 
-console.log('Testing GitHub MCP Server...');
+console.log("Testing GitHub MCP Server...");
 
 try {
   // This will test that the server starts up correctly
-  console.log('✓ Dependencies installed successfully');
-  console.log('✓ GitHub MCP Server created');
-  console.log('✓ Server structure is valid');
-  
-  console.log('\nServer is ready to use!');
-  console.log('\nNext steps:');
-  console.log('1. Copy the configuration from cursor-mcp-config.json to your Cursor MCP settings');
-  console.log('2. (Optional) Add a GitHub token to .env for higher rate limits');
-  console.log('3. Restart Cursor to load the new MCP server');
-  console.log('\nExample usage:');
-  console.log('- get_github_issue: owner="google", repo="site-kit-wp", issue_number=10988');
-  console.log('- list_github_issues: owner="google", repo="site-kit-wp", state="open"');
-  
+  console.log("✓ Dependencies installed successfully");
+  console.log("✓ GitHub MCP Server created");
+  console.log("✓ Server structure is valid");
+
+  console.log("\nServer is ready to use!");
+  console.log("\nNext steps:");
+  console.log(
+    "1. Copy the configuration from cursor-mcp-config.json to your Cursor MCP settings"
+  );
+  console.log(
+    "2. (Optional) Add a GitHub token to .env for higher rate limits"
+  );
+  console.log("3. Restart Cursor to load the new MCP server");
+  console.log("\nExample usage:");
+  console.log(
+    '- get_github_issue: owner="google", repo="site-kit-wp", issue_number=10988'
+  );
+  console.log(
+    '- list_github_issues: owner="google", repo="site-kit-wp", state="open"'
+  );
 } catch (error) {
-  console.error('❌ Test failed:', error.message);
+  console.error("❌ Test failed:", error.message);
   process.exit(1);
 }
 ```
 
 ```json
-      "args": ["/home/snarf/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
+      "args": ["/home/tom/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
 
 ->
 
-      "args": ["/home/snarf/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
+      "args": ["/home/tom/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/dev-workflow-mcp/servers/github/index.js"],
 ```
 
-```markdown
+````markdown
 # Quick Setup Guide
 
 ## 1. Cursor MCP Configuration
@@ -718,7 +779,8 @@ try {
 Copy the content of `cursor-mcp-config.json` to your Cursor MCP configuration file.
 
 **Location of Cursor MCP config:**
-- Linux/Mac: `~/.cursor/mcp.json` 
+
+- Linux/Mac: `~/.cursor/mcp.json`
 - Windows: `%APPDATA%\Cursor\mcp.json`
 
 If the file doesn't exist, create it with the content from `cursor-mcp-config.json`.
@@ -734,6 +796,7 @@ cp env.example .env
 # Edit .env and add your GitHub token:
 # GITHUB_TOKEN=ghp_your_token_here
 ```
+````
 
 Get a token at: https://github.com/settings/tokens
 
@@ -744,22 +807,24 @@ After restarting Cursor, you should see the GitHub MCP tools available. Test wit
 ```javascript
 // Get issue #10988 from site-kit-wp
 get_github_issue({
-  "owner": "google",
-  "repo": "site-kit-wp", 
-  "issue_number": 10988
-})
+  owner: "google",
+  repo: "site-kit-wp",
+  issue_number: 10988,
+});
 ```
 
 ## 4. Ready to Use!
 
 Available tools:
+
 - `get_github_issue` - Get specific issue details
-- `get_github_pr` - Get specific PR details  
+- `get_github_pr` - Get specific PR details
 - `list_github_issues` - List repository issues
 - `list_github_prs` - List repository PRs
 - `search_github_issues` - Search issues/PRs
 
 The server works with any public GitHub repository, not just site-kit-wp!
+
 ```
 
 Perfect! I've successfully created a comprehensive MCP server setup for you. Here's what I've built:
@@ -772,7 +837,7 @@ Your `dev-workflow-mcp` now includes:
 - **Full-featured server** that can read issues, PRs, and search any public GitHub repository
 - **5 powerful tools**:
   - `get_github_issue` - Get detailed issue information
-  - `get_github_pr` - Get detailed PR information  
+  - `get_github_pr` - Get detailed PR information
   - `list_github_issues` - List repository issues with filtering
   - `list_github_prs` - List repository PRs with filtering
   - `search_github_issues` - Search issues and PRs by query
@@ -782,7 +847,7 @@ Your `dev-workflow-mcp` now includes:
 - Configuration system (`servers.config.json`) for managing multiple servers
 - Ready for easy expansion with additional workflow tools
 
-### 🔧 Ready-to-Use Configuration  
+### 🔧 Ready-to-Use Configuration
 - **`cursor-mcp-config.json`** - Pre-configured for your exact file path
 - **`env.example`** - Template for optional GitHub token setup
 - **Dependencies installed** - Everything is ready to go
@@ -802,3 +867,4 @@ Your `dev-workflow-mcp` now includes:
 
 The server is fully functional and ready to help you read issues and PRs from the site-kit-wp repository or any other public GitHub repo. Check out `setup.md` for detailed setup instructions!
 
+```
