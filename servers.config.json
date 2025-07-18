@@ -1,0 +1,33 @@
+{
+  "servers": {
+    "github": {
+      "name": "GitHub MCP Server",
+      "description": "Provides tools for reading GitHub issues, PRs, and repository information",
+      "command": "node",
+      "args": ["servers/github/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "capabilities": ["tools"],
+      "tools": [
+        "get_github_issue",
+        "get_github_pr",
+        "list_github_issues",
+        "list_github_prs",
+        "search_github_issues"
+      ]
+    }
+  },
+  "presets": {
+    "site-kit-wp": {
+      "description": "Configuration for working with Google Site Kit WordPress plugin",
+      "servers": ["github"],
+      "default_params": {
+        "github": {
+          "owner": "google",
+          "repo": "site-kit-wp"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# Dev Workflow MCP
+# MCP Dev Workflow
 
 A collection of Model Context Protocol (MCP) servers for development workflow tools. This project provides MCP servers that enable AI assistants like Cursor to interact with development tools and services.
 
@@ -30,7 +30,7 @@ Provides tools for reading GitHub issues, pull requests, and repository informat
 
 ```bash
 git clone <repository-url>
-cd dev-workflow-mcp
+cd mcp-dev-workflow
 ```
 
 2. Install dependencies:
@@ -71,7 +71,7 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
   "mcpServers": {
     "github": {
       "command": "node",
-      "args": ["/path/to/dev-workflow-mcp/servers/github/index.js"],
+      "args": ["/path/to/mcp-dev-workflow/servers/github/index.js"],
       "env": {
         "GITHUB_TOKEN": "your_token_here"
       }

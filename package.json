@@ -1,0 +1,26 @@
+{
+  "name": "mcp-dev-workflow",
+  "version": "1.0.0",
+  "description": "MCP servers for development workflow tools",
+  "type": "module",
+  "scripts": {
+    "start:github": "node servers/github/index.js",
+    "dev": "npm run start:github"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "octokit": "^4.0.2",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "github",
+    "development",
+    "workflow"
+  ],
+  "author": "",
+  "license": "MIT"
+}
