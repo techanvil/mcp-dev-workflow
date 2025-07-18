@@ -3,7 +3,7 @@
     "github-dev-workflow": {
       "command": "node",
       "args": [
-        "/home/snarf/local-sites/sitekit-10uplabs-com/app/public/wp-content/plugins/google-site-kit/mcp-dev-workflow/servers/github/index.js"
+        "/home/snarf/git/techanvil/mcp-dev-workflow/servers/github/index.js"
       ],
       "env": {
         "GITHUB_TOKEN": ""
