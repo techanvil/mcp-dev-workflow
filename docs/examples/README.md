@@ -43,25 +43,25 @@ This section provides real-world examples and common workflows using the MCP ser
 ### Figma Examples
 
 ```bash
-# Read design files and extract information
+# Read design files (full URL or file reference both work)
 "Get the structure of this Figma file: https://www.figma.com/file/ABC123/design-system"
-"What components are available in the design library?"
-"Show me the latest comments on the checkout flow design"
+"Get tokens from Figma file design-system"
+"Show me the latest comments on Figma file checkout-flow"
 
 # Extract design tokens for development
-"Get all brand colors from the design system as CSS custom properties"
-"Export typography tokens as SCSS variables"
+"Get all brand colors from Figma file design-system as CSS custom properties"
+"Export typography tokens from Figma file UI-kit as SCSS variables"
 "Get spacing tokens from the design file as JSON"
 
 # Export assets for implementation
-"Export all icons from the UI kit as SVG files"
-"Download the logo assets as PNG files"
+"Export all icons from Figma file UI-kit as SVG files"
+"Download the logo assets from Figma file brand-assets as PNG files"
 "Export button component assets for development"
 
 # Search and discover design elements
-"Find all navigation components in the design system"
-"Search for error state designs in the component library"
-"What button variations are available?"
+"Find all navigation components in Figma file design-system"
+"Search for error state designs in Figma file component-library"
+"What button variations are available in the design file?"
 ```
 
 ## 🔄 Real-World Workflows
@@ -176,7 +176,7 @@ This section provides real-world examples and common workflows using the MCP ser
 **Scenario:** Implementing a new UI component from Figma designs
 
 ```bash
-1. "Get the design tokens from this Figma file as CSS custom properties"
+1. "Get the design tokens from Figma file design-system as CSS custom properties"
    → Extract color, typography, and spacing values
 
 2. "What components are available in the design system?"
@@ -490,8 +490,8 @@ Context about token refresh
 ```bash
 1. "Read the feature specification at [Google Doc URL]"
 2. "Search for 'requirements' in the specification"
-3. "Get design tokens from the Figma file as CSS variables"
-4. "Export component assets from the design file"
+3. "Get design tokens from Figma file design-system as CSS variables"
+4. "Export component assets from Figma file design-system"
 5. "Find GitHub issues related to this feature"
 6. "Get details on the implementation PR"
 ```
@@ -499,11 +499,11 @@ Context about token refresh
 **Design System Update:**
 
 ```bash
-1. "Get all design tokens from the Figma design system as JSON"
+1. "Get all design tokens from Figma file design-system as JSON"
 2. "Read the design system documentation at [Google Doc URL]"
 3. "Search for 'migration guide' in the documentation"
 4. "Find GitHub issues labeled 'design-system'"
-5. "Export updated brand assets from Figma"
+5. "Export updated brand assets from Figma file brand-kit"
 6. "Check recent PRs that update design tokens"
 ```
 

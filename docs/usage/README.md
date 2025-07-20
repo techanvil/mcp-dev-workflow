@@ -39,11 +39,11 @@ The power of MCP tools is **natural language interaction**. Instead of technical
 
 ### Figma Examples
 
-- "Get design tokens from this Figma file as CSS variables" → Extract design system tokens
+- "Get design tokens from Figma file design-system as CSS variables" → Extract design system tokens using shorthand
 - "What components are available in the design library?" → Discover component specifications
-- "Export all icons from the UI kit as SVG files" → Download assets for development
-- "Show me the latest comments on the checkout flow design" → Get design feedback
-- "What are the brand colors from the design system file?" → Extract color specifications
+- "Export all icons from Figma file UI-kit as SVG files" → Download assets using file reference
+- "Show me the latest comments on Figma file checkout-flow" → Get design feedback with shorthand
+- "What are the brand colors from https://www.figma.com/file/ABC123/design-system" → Extract colors using full URL
 
 ## 📋 GitHub Usage
 
@@ -325,40 +325,49 @@ All Figma operations require a personal access token:
 ### Basic File Operations
 
 ```bash
-# Get file structure and basic information
+# Get file structure and basic information (full URL or file reference both work)
 "Show me the structure of this Figma file: https://www.figma.com/file/ABC123/design-system"
+"Get file info from Figma file design-system"
 
 # Extract comments and feedback
-"What are the latest comments on the checkout flow design?"
+"What are the latest comments on Figma file checkout-flow?"
+"Show me feedback on the design file"
 
 # Search for specific elements
-"Find all button components in the design system file"
+"Find all button components in Figma file design-system"
+"Search for navigation elements in the file"
 ```
 
 ### Design Token Extraction
 
 ```bash
 # Extract colors as CSS custom properties
-"Get the brand colors from the design system as CSS variables"
+"Get the brand colors from Figma file design-system as CSS variables"
+"Export color tokens from the file as CSS"
 
 # Typography tokens as SCSS
-"Export typography tokens as SCSS variables"
+"Export typography tokens from Figma file design-system as SCSS variables"
+"Get font tokens as SCSS from the design file"
 
 # Comprehensive token extraction
-"Get all design tokens (colors, typography, spacing) as JSON"
+"Get all design tokens from Figma file design-system as JSON"
+"Export complete token system (colors, typography, spacing) as JSON"
 ```
 
 ### Asset Export
 
 ```bash
 # Export icons
-"Export all icons from the UI kit as SVG files"
+"Export all icons from Figma file UI-kit as SVG files"
+"Download icons from the design file as SVG"
 
 # Export specific assets
-"Download the logo and brand assets as PNG files"
+"Download the logo and brand assets from Figma file brand-kit as PNG files"
+"Export marketing assets from the file as PNG"
 
 # Component assets
-"Export all button component assets"
+"Export all button component assets from Figma file design-system"
+"Download component graphics from the file"
 ```
 
 ### Component Discovery
@@ -385,7 +394,7 @@ https://www.figma.com/file/FILE_KEY/file-name
 You can use:
 
 - **Full URL**: "Get tokens from https://www.figma.com/file/ABC123/design-system"
-- **File Key only**: "Get tokens from file ABC123"
+- **File reference**: "Get tokens from Figma file design-system"
 - **Natural references**: "Get tokens from the design system file" (if previously mentioned)
 
 ### Output Formats

@@ -1,8 +1,85 @@
 # Setup Guide
 
-This guide covers setting up both the GitHub and Google Workspace MCP servers.
+This guide covers setting up the GitHub, Google Workspace, and Figma MCP servers.
 
-## Quick Setup
+## 🚀 Automated Setup (Recommended)
+
+The easiest way to get started is using our configuration generator, which creates optimized Cursor configs automatically.
+
+### 1. Install Dependencies
+
+```bash
+git clone <repository-url>
+cd mcp-dev-workflow
+npm install
+```
+
+### 2. Generate Configuration
+
+Choose a preset that matches your workflow:
+
+```bash
+# Frontend development (all servers: GitHub + Google Workspace + Figma)
+npm run generate:config -- --preset=frontend-dev --output=cursor-config.json
+
+# Design system work (Figma + GitHub)
+npm run generate:config -- --preset=design-system --output=cursor-config.json
+
+# Site Kit WordPress development (GitHub only)
+npm run generate:config -- --preset=site-kit-wp --output=cursor-config.json
+
+# All servers (custom configuration)
+npm run generate:config -- --output=cursor-config.json
+```
+
+### 3. Copy Configuration to Cursor
+
+**Linux/Mac:**
+
+```bash
+cp cursor-config.json ~/.cursor/mcp.json
+```
+
+**Windows:**
+
+```bash
+copy cursor-config.json %APPDATA%\Cursor\mcp.json
+```
+
+### 4. Set Environment Variables
+
+Create your `.env` file:
+
+```bash
+cp env.example .env
+# Edit .env with your tokens (see authentication sections below)
+```
+
+### 5. Restart Cursor
+
+Restart Cursor completely for the servers to load.
+
+### 🎯 Available Presets
+
+| Preset          | Servers                           | Best For            | Use Case                                     |
+| --------------- | --------------------------------- | ------------------- | -------------------------------------------- |
+| `frontend-dev`  | GitHub + Google Workspace + Figma | Full-stack teams    | Complete design-to-code workflow             |
+| `design-system` | Figma + GitHub                    | Design teams        | Design token management, component libraries |
+| `site-kit-wp`   | GitHub only                       | Site Kit developers | WordPress plugin development                 |
+
+### ✅ Benefits of Automated Setup
+
+- **Zero Configuration Errors**: Generated configs are always valid
+- **Team Consistency**: Everyone gets the same optimized setup
+- **Easy Updates**: Regenerate configs when servers are updated
+- **Preset Optimization**: Configurations tuned for specific workflows
+- **Future-Proof**: Automatically includes new servers and features
+
+---
+
+## 📋 Manual Setup (Alternative)
+
+If you prefer manual configuration or need custom settings:
 
 ### 1. Install Dependencies
 
@@ -38,7 +115,7 @@ Restart Cursor completely (not just reload window) for the MCP servers to load.
 
 ### 4. Test the Setup
 
-Once Cursor restarts, test both servers:
+Once Cursor restarts, test the servers:
 
 **GitHub Tools:**
 
@@ -48,6 +125,11 @@ Once Cursor restarts, test both servers:
 **Google Workspace Tools (requires authentication):**
 
 - "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
+
+**Figma Tools (requires authentication):**
+
+- "Get design tokens from https://www.figma.com/file/YOUR_FILE_KEY/"
+- "What components are available in the design file?"
 
 ## GitHub Setup
 
@@ -143,6 +225,46 @@ Authentication is **required** for Google Workspace tools. Choose one method:
 "https://www.googleapis.com/auth/drive.readonly";
 ```
 
+## Figma Setup
+
+Authentication is **required** for all Figma tools.
+
+### Personal Access Token Setup
+
+1. **Create Figma Token:**
+
+   - Go to [Figma Settings > Personal Access Tokens](https://www.figma.com/settings)
+   - Click "Create new token"
+   - Enter a descriptive name (e.g., "MCP Dev Workflow")
+   - Save the token immediately (it won't be shown again)
+
+2. **Add to Environment:**
+
+   ```bash
+   cp env.example .env
+   # Edit .env and add:
+   FIGMA_ACCESS_TOKEN=figd_your_token_here
+   ```
+
+3. **Optional Team Configuration:**
+
+   ```bash
+   # For simplified commands (optional)
+   DEFAULT_FIGMA_TEAM_ID=your_team_id
+   DEFAULT_FIGMA_PROJECT_ID=your_project_id
+   ```
+
+### Token Permissions
+
+- **Read-only access**: Figma tokens only provide read access to design files
+- **File-level permissions**: Token respects Figma's existing file sharing permissions
+- **Team boundaries**: Cannot access files outside your team permissions
+
+### Rate Limits
+
+- **Rate limit**: 300 requests/minute (automatically handled)
+- **Asset exports**: Limited to 10 per request (configurable)
+
 ## Troubleshooting
 
 ### Tools Not Available in Cursor
@@ -185,6 +307,25 @@ npm run auth:google  # For OAuth2
 - Built-in rate limiting protects against API limits
 - Wait for specified time before retrying
 
+### Figma Issues
+
+**"403 Forbidden":**
+
+- Invalid or expired Figma token
+- File not shared with your account
+- **Solution**: Regenerate token, check file sharing permissions
+
+**"404 Not Found":**
+
+- File key doesn't exist or file deleted
+- Incorrect file URL format
+- **Solution**: Verify file URL: `https://www.figma.com/file/FILE_KEY/file-name`
+
+**"Rate limit exceeded":**
+
+- Too many requests in short time period
+- **Solution**: Wait 1 minute for rate limit reset
+
 ### Debug Steps
 
 1. **Test servers individually:**
@@ -192,6 +333,7 @@ npm run auth:google  # For OAuth2
    ```bash
    npm run start:github
    npm run start:google-workspace
+   npm run start:figma
    ```
 
 2. **Verify authentication:**
@@ -202,6 +344,9 @@ npm run auth:google  # For OAuth2
 
    # GitHub (check if token works)
    curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
+
+   # Figma (check if token works)
+   curl -H "X-Figma-Token: YOUR_TOKEN" https://api.figma.com/v1/me
    ```
 
 3. **Check API quotas:**
@@ -238,6 +383,13 @@ Once setup is complete:
       "env": {
         "GOOGLE_SERVICE_ACCOUNT_FILE": "/path/to/service-account.json"
       }
+    },
+    "figma": {
+      "command": "node",
+      "args": ["/path/to/mcp-dev-workflow/servers/figma/index.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "figd_your_token_here"
+      }
     }
   }
 }
@@ -257,4 +409,11 @@ GOOGLE_SERVICE_ACCOUNT_KEY={"type":"service_account",...}
 GOOGLE_CLIENT_ID=your_client_id
 GOOGLE_CLIENT_SECRET=your_client_secret
 GOOGLE_TOKEN_FILE=.google-token.json
+
+# Figma (required)
+FIGMA_ACCESS_TOKEN=figd_your_token
+
+# Optional defaults for simplified commands
+DEFAULT_FIGMA_TEAM_ID=your_team_id
+DEFAULT_FIGMA_PROJECT_ID=your_project_id
 ```

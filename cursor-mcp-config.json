@@ -19,6 +19,15 @@
         "GOOGLE_CLIENT_SECRET": "",
         "GOOGLE_TOKEN_FILE": ""
       }
+    },
+    "figma": {
+      "command": "node",
+      "args": ["/path/to/mcp-dev-workflow/servers/figma/index.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "",
+        "DEFAULT_FIGMA_TEAM_ID": "",
+        "DEFAULT_FIGMA_PROJECT_ID": ""
+      }
     }
   }
 }
