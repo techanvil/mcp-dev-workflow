@@ -103,8 +103,8 @@ get_github_issue with:
 
 # Explicit repository
 get_github_issue with:
-- owner: "microsoft"
-- repo: "vscode"
+  - owner: "nodejs"
+  - repo: "node"
 - issue_number: 123
 ```
 
@@ -113,7 +113,7 @@ get_github_issue with:
 Instead of technical tool calls, you can use natural language:
 
 - "Show me issue 2345"
-- "Get details on PR #1234 from microsoft/vscode"
+- "Get details on PR #1234 from nodejs/node"
 - "List recent open issues"
 - "Search for storybook-related issues"
 - "Find PRs about authentication"
@@ -186,7 +186,7 @@ The server supports a **default repository** configuration to simplify usage:
 
 - Simplified commands: "Show me issue 2345" (no need to specify owner/repo)
 - Faster workflows for teams working on a primary repository
-- Easy to override when needed: "Show me issue 123 from microsoft/vscode"
+- Easy to override when needed: "Show me issue 123 from nodejs/node"
 
 ## 🚨 Troubleshooting
 

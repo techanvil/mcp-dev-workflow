@@ -76,7 +76,7 @@ Instead of technical syntax, use natural language:
 
 - "Show me issue 2345" (uses default repo: google/site-kit-wp)
 - "Find storybook-related issues"
-- "List recent PRs from microsoft/vscode"
+- "List recent PRs from nodejs/node"
 
 **Google Workspace:**
 

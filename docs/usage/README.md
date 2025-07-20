@@ -22,7 +22,7 @@ The power of MCP tools is **natural language interaction**. Instead of technical
 ### GitHub Examples
 
 - "Show me issue 2345" → Uses default repository (google/site-kit-wp)
-- "Get details on PR #1234 from microsoft/vscode" → Override default repository
+- "Get details on PR #1234 from nodejs/node" → Override default repository
 - "List the recent open issues" → Browse current work
 - "Search for storybook-related issues" → Find related work
 - "What pull requests are currently open for review?" → Check review queue
@@ -47,7 +47,7 @@ The GitHub server is configured with **google/site-kit-wp** as the default repos
 
 **Explicit repository:**
 
-- "Show me issue 123 from microsoft/vscode"
+- "Show me issue 123 from nodejs/node"
 - "List PRs from facebook/react"
 
 ### GitHub Tools
@@ -63,8 +63,8 @@ get_github_issue with:
 
 # Full syntax (other repos)
 get_github_issue with:
-- owner: "microsoft"
-- repo: "vscode"
+  - owner: "nodejs"
+  - repo: "node"
 - issue_number: 123
 ```
 
@@ -274,6 +274,11 @@ search_google_doc with:
 - "action", "TODO", "follow-up"
 - "decision", "agreed", "resolved"
 - "blocker", "issue", "concern"
+
+**Note:** When searching Google Docs, always specify the document URL/ID:
+
+- "Search for 'blockers' in the project update at [Google Doc URL]"
+- Not just "Search for 'blockers' in the project update"
 
 ## 💡 Best Practices
 

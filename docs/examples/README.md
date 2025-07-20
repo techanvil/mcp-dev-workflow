@@ -19,7 +19,7 @@ This section provides real-world examples and common workflows using the MCP ser
 "Search for authentication-related PRs"
 
 # Cross-repository work
-"Get issue 123 from microsoft/vscode"
+"Get issue 123 from nodejs/node"
 "List PRs from facebook/react"
 ```
 
@@ -331,8 +331,8 @@ Context about token refresh
 ```javascript
 // Direct tool usage (if needed)
 get_github_issue({
-  owner: "microsoft",
-  repo: "vscode",
+  owner: "nodejs",
+  repo: "node",
   issue_number: 123,
 });
 
