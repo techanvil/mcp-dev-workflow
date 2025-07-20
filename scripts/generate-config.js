@@ -10,14 +10,63 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.dirname(__dirname);
 
+// Load environment variables from .env file
+const envPath = path.join(projectRoot, ".env");
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+  console.error(`✓ Loaded environment variables from .env`);
+} else {
+  console.error(
+    `ℹ No .env file found at ${envPath}, using system environment variables only`
+  );
+}
+
 // Load the centralized config
 const configPath = path.join(projectRoot, "servers.config.json");
 const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+
+/**
+ * Substitute environment variable placeholders with actual values
+ * @param {string} value - String potentially containing ${VAR_NAME} placeholders
+ * @returns {string} - String with placeholders replaced by environment variable values
+ */
+function substituteEnvironmentVariables(value) {
+  if (typeof value !== "string") return value;
+
+  return value.replace(/\$\{([^}]+)\}/g, (match, varName) => {
+    const envValue = process.env[varName];
+    if (envValue === undefined) {
+      console.warn(`Warning: Environment variable ${varName} is not defined`);
+      return match; // Keep the placeholder if variable is not defined
+    }
+    return envValue;
+  });
+}
+
+/**
+ * Process environment object, substituting all placeholders
+ * @param {Object} envObject - Object containing environment variable definitions
+ * @returns {Object} - Object with substituted values
+ */
+function processEnvironmentObject(envObject) {
+  const processed = {};
+
+  Object.entries(envObject).forEach(([key, value]) => {
+    const substitutedValue = substituteEnvironmentVariables(value);
+    // Only include environment variables that have actual values (not empty or placeholders)
+    if (substitutedValue && !substitutedValue.includes("${")) {
+      processed[key] = substitutedValue;
+    }
+  });
+
+  return processed;
+}
 
 /**
  * Generate Cursor MCP configuration from servers.config.json
@@ -51,22 +100,31 @@ function generateCursorConfig(preset = null) {
       env: {},
     };
 
-    // Add environment variables
-    Object.entries(server.env).forEach(([key, value]) => {
-      serverConfig.env[key] = value;
-    });
+    // Process and add environment variables with substitution
+    const processedEnv = processEnvironmentObject(server.env);
+    Object.assign(serverConfig.env, processedEnv);
 
-    // Apply preset defaults for this server
+    // Apply preset defaults for this server (only if not already set by environment variables)
     if (defaultParams[serverKey]) {
       Object.entries(defaultParams[serverKey]).forEach(([key, value]) => {
         const envKey = `DEFAULT_${serverKey.toUpperCase()}_${key.toUpperCase()}`;
-        serverConfig.env[envKey] = value;
+        // Only set the default if the environment variable doesn't already exist
+        if (!(envKey in serverConfig.env)) {
+          serverConfig.env[envKey] = value;
+        }
       });
     }
 
-    // Use a descriptive key for the server
-    const serverName = preset ? `${serverKey}-${preset}` : serverKey;
-    cursorConfig.mcpServers[serverName] = serverConfig;
+    // Only include server if it has valid environment configuration
+    if (Object.keys(serverConfig.env).length > 0) {
+      // Use a descriptive key for the server
+      const serverName = preset ? `${serverKey}-${preset}` : serverKey;
+      cursorConfig.mcpServers[serverName] = serverConfig;
+    } else {
+      console.warn(
+        `Warning: Server '${serverKey}' has no valid environment variables configured, skipping`
+      );
+    }
   });
 
   return cursorConfig;
