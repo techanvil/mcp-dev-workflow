@@ -6,7 +6,7 @@
   "scripts": {
     "start:github": "node servers/github/index.js",
     "start:google-workspace": "node servers/google-workspace/index.js",
-    "auth:google": "node google-auth-setup.js",
+    "auth:google": "node scripts/google-auth-setup.js",
     "test:setup": "node test-setup.js",
     "dev": "npm run start:github"
   },
