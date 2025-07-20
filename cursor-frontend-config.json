@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "github-frontend-dev": {
+      "command": "node",
+      "args": [
+        "/home/snarf/git/techanvil/mcp-dev-workflow/servers/github/index.js"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "DEFAULT_GITHUB_OWNER": "your-org",
+        "DEFAULT_GITHUB_REPO": "frontend-app"
+      }
+    },
+    "google-workspace-frontend-dev": {
+      "command": "node",
+      "args": [
+        "/home/snarf/git/techanvil/mcp-dev-workflow/servers/google-workspace/index.js"
+      ],
+      "env": {
+        "GOOGLE_SERVICE_ACCOUNT_KEY": "${GOOGLE_SERVICE_ACCOUNT_KEY}",
+        "GOOGLE_SERVICE_ACCOUNT_FILE": "${GOOGLE_SERVICE_ACCOUNT_FILE}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}",
+        "GOOGLE_TOKEN_FILE": "${GOOGLE_TOKEN_FILE}"
+      }
+    },
+    "figma-frontend-dev": {
+      "command": "node",
+      "args": [
+        "/home/snarf/git/techanvil/mcp-dev-workflow/servers/figma/index.js"
+      ],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "${FIGMA_ACCESS_TOKEN}",
+        "DEFAULT_FIGMA_TEAM_ID": "your_team_id",
+        "DEFAULT_FIGMA_PROJECT_ID": "design_system_project"
+      }
+    }
+  }
+}

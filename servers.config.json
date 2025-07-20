@@ -35,6 +35,26 @@
         "get_google_doc_metadata",
         "search_google_doc"
       ]
+    },
+    "figma": {
+      "name": "Figma MCP Server",
+      "description": "Provides tools for reading Figma design files, components, assets, and design tokens",
+      "command": "node",
+      "args": ["servers/figma/index.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "${FIGMA_ACCESS_TOKEN}",
+        "DEFAULT_FIGMA_TEAM_ID": "${DEFAULT_FIGMA_TEAM_ID}",
+        "DEFAULT_FIGMA_PROJECT_ID": "${DEFAULT_FIGMA_PROJECT_ID}"
+      },
+      "capabilities": ["tools"],
+      "tools": [
+        "get_figma_file",
+        "get_figma_components",
+        "get_design_tokens",
+        "get_figma_comments",
+        "export_figma_assets",
+        "search_figma_layers"
+      ]
     }
   },
   "presets": {
@@ -45,6 +65,34 @@
         "github": {
           "owner": "google",
           "repo": "site-kit-wp"
+        }
+      }
+    },
+    "frontend-dev": {
+      "description": "Complete frontend development workflow with design, docs, and code",
+      "servers": ["github", "google-workspace", "figma"],
+      "default_params": {
+        "github": {
+          "owner": "your-org",
+          "repo": "frontend-app"
+        },
+        "figma": {
+          "team_id": "your_team_id",
+          "project_id": "design_system_project"
+        }
+      }
+    },
+    "design-system": {
+      "description": "Design system focused workflow with components and tokens",
+      "servers": ["figma", "github"],
+      "default_params": {
+        "figma": {
+          "team_id": "design_team_id",
+          "project_id": "design_system"
+        },
+        "github": {
+          "owner": "your-org",
+          "repo": "design-tokens"
         }
       }
     }

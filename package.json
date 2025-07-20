@@ -6,7 +6,9 @@
   "scripts": {
     "start:github": "node servers/github/index.js",
     "start:google-workspace": "node servers/google-workspace/index.js",
+    "start:figma": "node servers/figma/index.js",
     "auth:google": "node scripts/google-auth-setup.js",
+    "generate:config": "node scripts/generate-config.js",
     "test:setup": "node test-setup.js",
     "dev": "npm run start:github"
   },
@@ -24,6 +26,8 @@
     "github",
     "google-workspace",
     "google-docs",
+    "figma",
+    "design-tokens",
     "development",
     "workflow"
   ],
