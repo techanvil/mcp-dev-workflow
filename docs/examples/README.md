@@ -26,8 +26,9 @@ This section provides real-world examples and common workflows using the MCP ser
 ### Google Workspace Examples
 
 ```bash
-# Read documents
+# Read documents (full URL or just document ID both work)
 "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
+"Read document YOUR_DOCUMENT_ID"
 "Show me the content of that Google Doc in markdown format"
 
 # Search within documents
@@ -52,7 +53,7 @@ This section provides real-world examples and common workflows using the MCP ser
 2. "Search for similar feature issues"
    → Find related work and patterns
 
-3. "Read the design doc at [URL]"
+3. "Read the design doc at [URL]" or "Read document [DOC_ID]"
    → Understand technical specifications
 
 4. "Search for 'API design' in the design doc"
