@@ -8,7 +8,7 @@ _Exported on 7/18/2025 at 14:21:34 GMT+1 from Cursor (1.1.3)_
 
 I want to create an MCP server that will allow Cursor to read issues and PRs from @https://github.com/google/site-kit-wp . I don't want to use the built-in GitHub integration because it will take too long to get approval for access.
 
-I've created the `dev-workflow-mcp` as a stub to build this in. I would also like to add more MCP servers as time goes on so let's make it scalable. @README.md
+I've created the `dev-workflow-mcp` as a stub to build this in. I would also like to add more MCP servers as time goes on so let's make it scalable.
 
 ---
 

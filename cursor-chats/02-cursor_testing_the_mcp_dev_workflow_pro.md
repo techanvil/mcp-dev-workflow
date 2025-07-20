@@ -6,7 +6,7 @@ _Exported on 7/18/2025 at 14:54:44 GMT+1 from Cursor (1.1.3)_
 
 **User**
 
-use ths exported chat for context, this is what we've set up here.
+use this exported chat for context, this is what we've set up here.
 
 I have, however renamed the project to mcp-dev-workflow.
 
