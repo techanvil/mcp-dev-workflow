@@ -34,6 +34,7 @@ Detailed service-specific documentation:
 
 - **[GitHub Server](services/github.md)** - GitHub integration, authentication, and advanced features
 - **[Google Workspace Server](services/google-workspace.md)** - Google Workspace setup, architecture, and capabilities
+- **[Figma Server](services/figma.md)** - Figma design file integration, design tokens, and asset export
 
 ## 🚀 Quick Navigation
 
@@ -47,6 +48,7 @@ Detailed service-specific documentation:
 
 - **GitHub**: See [GitHub Server Documentation](services/github.md), [Usage → GitHub](usage/README.md#github-usage), and [Examples](examples/README.md#github-examples)
 - **Google Workspace**: See [Google Workspace Server Documentation](services/google-workspace.md), [Usage → Google Workspace](usage/README.md#google-workspace-usage), and [Examples](examples/README.md#google-workspace-examples)
+- **Figma**: See [Figma Server Documentation](services/figma.md), [Usage → Figma](usage/README.md#figma-usage), and [Examples](examples/README.md#figma-examples)
 
 ### Common Tasks
 
@@ -59,6 +61,7 @@ Detailed service-specific documentation:
 - **[Main README](../README.md)** - Project overview and quick start
 - **[GitHub Server Code](../servers/github/)** - GitHub server implementation
 - **[Google Workspace Server Code](../servers/google-workspace/)** - Google Workspace server implementation
+- **[Figma Server Code](../servers/figma/)** - Figma server implementation
 
 ---
 

@@ -40,6 +40,30 @@ This section provides real-world examples and common workflows using the MCP ser
 "When was this document last modified?"
 ```
 
+### Figma Examples
+
+```bash
+# Read design files and extract information
+"Get the structure of this Figma file: https://figma.com/file/ABC123/design-system"
+"What components are available in the design library?"
+"Show me the latest comments on the checkout flow design"
+
+# Extract design tokens for development
+"Get all brand colors from the design system as CSS custom properties"
+"Export typography tokens as SCSS variables"
+"Get spacing tokens from the design file as JSON"
+
+# Export assets for implementation
+"Export all icons from the UI kit as SVG files"
+"Download the logo assets as PNG files"
+"Export button component assets for development"
+
+# Search and discover design elements
+"Find all navigation components in the design system"
+"Search for error state designs in the component library"
+"What button variations are available?"
+```
+
 ## 🔄 Real-World Workflows
 
 ### Workflow 1: Feature Development Planning
@@ -147,6 +171,60 @@ This section provides real-world examples and common workflows using the MCP ser
    → Check critical blockers
 ```
 
+### Workflow 6: Design-to-Development Implementation
+
+**Scenario:** Implementing a new UI component from Figma designs
+
+```bash
+1. "Get the design tokens from this Figma file as CSS custom properties"
+   → Extract color, typography, and spacing values
+
+2. "What components are available in the design system?"
+   → Understand existing component library
+
+3. "Show me the button component specifications"
+   → Get detailed component requirements
+
+4. "Export all icon assets as SVG files"
+   → Download assets needed for implementation
+
+5. "What are the latest comments on this design file?"
+   → Check for recent feedback or changes
+
+6. "Show me issue #1234"
+   → Read development requirements and acceptance criteria
+
+7. "Export the error state icons for the form components"
+   → Get specific assets for error handling
+```
+
+### Workflow 7: Design System Maintenance
+
+**Scenario:** Updating and auditing the design system
+
+```bash
+1. "Get all design tokens from the main design system file as JSON"
+   → Extract complete token system for analysis
+
+2. "What component variations exist for buttons?"
+   → Audit component library completeness
+
+3. "Search for authentication-related components"
+   → Find specific use case components
+
+4. "Export all brand assets as PNG files"
+   → Update marketing and documentation materials
+
+5. "Find GitHub issues labeled 'design-system'"
+   → Check for reported inconsistencies or requests
+
+6. "Read the design system documentation at [Google Doc URL]"
+   → Review current design guidelines
+
+7. "Search for 'token migration' in the design doc"
+   → Check migration plans and timelines
+```
+
 ## 📋 Format Examples
 
 ### GitHub Tool Outputs
@@ -200,6 +278,115 @@ This document outlines the authentication system design...
 
 ## Security Considerations
 **Important:** All authentication endpoints must use HTTPS...
+```
+
+### Figma Tool Outputs
+
+#### Design Tokens (CSS Format)
+
+```css
+/* Design Tokens - Generated from Figma */
+:root {
+  /* Colors */
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-secondary-500: #10b981;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-900: #171717;
+
+  /* Typography */
+  --font-family-heading: "Inter", sans-serif;
+  --font-family-body: "Inter", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+```
+
+#### Component Discovery
+
+```
+Found 12 components in the design system:
+
+1. Button (COMPONENT_SET)
+   - Variants: primary, secondary, tertiary
+   - States: default, hover, focus, disabled
+   - Sizes: small, medium, large
+
+2. Input Field (COMPONENT_SET)
+   - Types: text, email, password, search
+   - States: default, focus, error, disabled
+
+3. Card (COMPONENT)
+   - Description: Basic card container with padding and shadow
+   - Usage: Content containers, feature highlights
+
+4. Navigation Bar (COMPONENT)
+   - Description: Main site navigation with logo and menu items
+   - Responsive: Mobile and desktop variants
+```
+
+#### File Structure
+
+```
+Figma File: Design System v2.0
+Pages: 5 total
+
+1. 🎨 Tokens
+   - Color Palette (24 colors)
+   - Typography Scale (8 sizes)
+   - Spacing System (10 values)
+
+2. 🧩 Components
+   - Buttons (3 variants, 4 states)
+   - Forms (6 input types)
+   - Navigation (2 layouts)
+   - Cards (4 variants)
+
+3. 📱 Mobile Screens
+   - Login Flow (5 screens)
+   - Dashboard (3 screens)
+   - Settings (4 screens)
+
+4. 💻 Desktop Screens
+   - Main Application (8 screens)
+   - Admin Panel (6 screens)
+
+5. 📄 Documentation
+   - Usage Guidelines
+   - Component Specs
+   - Design Principles
+```
+
+#### Design Comments
+
+```
+Latest comments on checkout flow design:
+
+1. Sarah Chen (Designer) - 2 hours ago
+   "Updated the error states for the payment form. Please check the red color contrast."
+   → On: Payment Form Error States
+
+2. Mike Rodriguez (PM) - 1 day ago
+   "The CTA button needs to be more prominent. Can we try the primary button style?"
+   → On: Checkout Button
+
+3. Alex Kim (Developer) - 2 days ago
+   "What's the exact spacing between form fields? Need precise values for implementation."
+   → On: Form Layout Specs
+
+4. Sarah Chen (Designer) - 2 days ago
+   "@Alex spacing is 16px between fields, 24px between sections. Added to token page."
+   → Reply to: Form Layout Specs
 ```
 
 #### Search Results
@@ -303,8 +490,21 @@ Context about token refresh
 ```bash
 1. "Read the feature specification at [Google Doc URL]"
 2. "Search for 'requirements' in the specification"
-3. "Find issues related to this feature"
-4. "Get details on the implementation PR"
+3. "Get design tokens from the Figma file as CSS variables"
+4. "Export component assets from the design file"
+5. "Find GitHub issues related to this feature"
+6. "Get details on the implementation PR"
+```
+
+**Design System Update:**
+
+```bash
+1. "Get all design tokens from the Figma design system as JSON"
+2. "Read the design system documentation at [Google Doc URL]"
+3. "Search for 'migration guide' in the documentation"
+4. "Find GitHub issues labeled 'design-system'"
+5. "Export updated brand assets from Figma"
+6. "Check recent PRs that update design tokens"
 ```
 
 **Research → Planning:**
@@ -361,6 +561,23 @@ search_google_doc({
 });
 ```
 
+### Figma API Syntax
+
+```javascript
+// Direct tool usage (if needed)
+get_design_tokens({
+  file_key: "ABC123def456",
+  format: "css",
+  token_types: ["colors", "typography", "spacing"],
+});
+
+export_figma_assets({
+  file_key: "ABC123def456",
+  asset_type: "icons",
+  format: "svg",
+});
+```
+
 ## 🎯 Use Case Library
 
 ### Development Team Scenarios
@@ -396,18 +613,30 @@ search_google_doc({
 - Get issue requirements
 - Research similar implementations
 - Read design specifications
+- Extract design tokens from Figma
+- Export needed assets for implementation
 
 **Debugging Issues:**
 
 - Search for similar problems
 - Read troubleshooting guides
 - Check recent related changes
+- Verify design specifications match implementation
 
 **Code Review:**
 
 - Understand PR context
 - Read relevant documentation
 - Check related issues
+- Verify design consistency with Figma specs
+
+**Design Implementation:**
+
+- Extract exact color values from design files
+- Get component specifications and variations
+- Export icons and assets for development
+- Check latest design feedback and comments
+- Verify spacing and typography tokens
 
 **Learning Codebase:**
 

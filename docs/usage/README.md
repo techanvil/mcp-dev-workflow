@@ -1,6 +1,6 @@
 # Usage Guide
 
-This guide provides practical examples and usage patterns for both GitHub and Google Workspace MCP servers.
+This guide provides practical examples and usage patterns for the GitHub, Google Workspace, and Figma MCP servers.
 
 ## 🚀 Quick Reference
 
@@ -14,6 +14,9 @@ This guide provides practical examples and usage patterns for both GitHub and Go
 | **Google Workspace** | `get_google_doc`          | Read documents     | "Read design doc at [URL]" |
 |                      | `get_google_doc_metadata` | Get doc properties | "Doc metadata for [URL]"   |
 |                      | `search_google_doc`       | Search within docs | "Find 'API' in the doc"    |
+| **Figma**            | `get_figma_file`          | Read design files  | "Get file structure"       |
+|                      | `get_design_tokens`       | Extract tokens     | "Get colors as CSS"        |
+|                      | `export_figma_assets`     | Export assets      | "Export icons as SVG"      |
 
 ## 💬 Natural Language Usage
 
@@ -33,6 +36,14 @@ The power of MCP tools is **natural language interaction**. Instead of technical
 - "Search for 'authentication' in that document" → Find specific sections
 - "What's the metadata for this Google Doc?" → Get document properties
 - "Show me the content in markdown format" → Specify output format
+
+### Figma Examples
+
+- "Get design tokens from this Figma file as CSS variables" → Extract design system tokens
+- "What components are available in the design library?" → Discover component specifications
+- "Export all icons from the UI kit as SVG files" → Download assets for development
+- "Show me the latest comments on the checkout flow design" → Get design feedback
+- "What are the brand colors from the design system file?" → Extract color specifications
 
 ## 📋 GitHub Usage
 
@@ -301,6 +312,98 @@ search_google_doc with:
 - **Private docs:** Share with service account email or use OAuth2
 - **Large docs:** Use search to find specific sections efficiently
 
+## 🎨 Figma Usage
+
+### Authentication Requirements
+
+All Figma operations require a personal access token:
+
+- **Token Setup**: Get from [Figma Settings > Personal Access Tokens](https://www.figma.com/settings)
+- **Environment**: Set `FIGMA_ACCESS_TOKEN=figd_your_token`
+- **Access Level**: Token provides read-only access to files you can view
+
+### Basic File Operations
+
+```bash
+# Get file structure and basic information
+"Show me the structure of this Figma file: https://figma.com/file/ABC123/design-system"
+
+# Extract comments and feedback
+"What are the latest comments on the checkout flow design?"
+
+# Search for specific elements
+"Find all button components in the design system file"
+```
+
+### Design Token Extraction
+
+```bash
+# Extract colors as CSS custom properties
+"Get the brand colors from the design system as CSS variables"
+
+# Typography tokens as SCSS
+"Export typography tokens as SCSS variables"
+
+# Comprehensive token extraction
+"Get all design tokens (colors, typography, spacing) as JSON"
+```
+
+### Asset Export
+
+```bash
+# Export icons
+"Export all icons from the UI kit as SVG files"
+
+# Export specific assets
+"Download the logo and brand assets as PNG files"
+
+# Component assets
+"Export all button component assets"
+```
+
+### Component Discovery
+
+```bash
+# List all components
+"What components are available in the design library?"
+
+# Find specific component types
+"Show me all the card component variations"
+
+# Component specifications
+"What are the specifications for the primary button component?"
+```
+
+### Working with File URLs
+
+Figma file URLs have this format:
+
+```
+https://www.figma.com/file/FILE_KEY/file-name
+```
+
+You can use:
+
+- **Full URL**: "Get tokens from https://figma.com/file/ABC123/design-system"
+- **File Key only**: "Get tokens from file ABC123"
+- **Natural references**: "Get tokens from the design system file" (if previously mentioned)
+
+### Output Formats
+
+Design tokens can be exported in multiple formats:
+
+- **CSS**: Custom properties (`--color-primary: #3b82f6`)
+- **SCSS**: Variables (`$color-primary: #3b82f6`)
+- **JSON**: Structured data for tooling
+- **Markdown**: Human-readable documentation
+
+### Best Practices
+
+- **File Organization**: Use clear file and page names for easier discovery
+- **Token Pages**: Organize design tokens in dedicated pages/frames
+- **Component Libraries**: Use Figma's component features for better discovery
+- **Comments**: Use comments for design specifications and developer notes
+
 ## 🆘 Common Issues
 
 ### Rate Limiting
@@ -328,12 +431,29 @@ search_google_doc with:
 - Document not shared with service account
 - **Solution:** Share document or verify OAuth2 access
 
+**Figma "403 Forbidden":**
+
+- Invalid or expired token
+- File not accessible with current permissions
+- **Solution:** Regenerate token, check file sharing permissions
+
+**Figma "404 Not Found":**
+
+- File key doesn't exist or file deleted
+- Incorrect file URL format
+- **Solution:** Verify file URL, check if file still exists
+
 ### Search Issues
 
 **No results found:**
 
 - Try broader search terms
 - Check spelling and syntax
+
+**Figma rate limiting:**
+
+- Too many requests in short time
+- **Solution:** Wait 1 minute for rate limit reset
 - Use synonyms or related keywords
 - Verify content exists in target
 
