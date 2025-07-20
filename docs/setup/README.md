@@ -4,7 +4,7 @@ This guide covers setting up the GitHub, Google Workspace, and Figma MCP servers
 
 ## 🚀 Automated Setup (Recommended)
 
-The easiest way to get started is using our configuration generator, which creates optimized Cursor configs automatically.
+The easiest way to get started is using our intelligent configuration generator, which creates optimized Cursor configs with your actual API tokens and settings automatically.
 
 ### 1. Install Dependencies
 
@@ -14,7 +14,16 @@ cd mcp-dev-workflow
 npm install
 ```
 
-### 2. Generate Configuration
+### 2. Set Environment Variables
+
+**Create your `.env` file first** (the generator reads from this):
+
+```bash
+cp env.example .env
+# Edit .env with your actual tokens and settings (see authentication sections below)
+```
+
+### 3. Generate Ready-to-Use Configuration
 
 Choose a preset that matches your workflow:
 
@@ -32,7 +41,15 @@ npm run generate:config -- --preset=site-kit-wp --output=cursor-config.json
 npm run generate:config -- --output=cursor-config.json
 ```
 
-### 3. Copy Configuration to Cursor
+The generator will:
+
+- ✅ **Read your `.env` file** and substitute actual API tokens
+- ✅ **Validate environment variables** and skip servers without valid configs
+- ✅ **Prioritize your personal settings** over preset defaults
+- ✅ **Generate absolute paths** for your system
+- ✅ **Show warnings** for missing environment variables
+
+### 4. Copy Configuration to Cursor
 
 **Linux/Mac:**
 
@@ -44,15 +61,6 @@ cp cursor-config.json ~/.cursor/mcp.json
 
 ```bash
 copy cursor-config.json %APPDATA%\Cursor\mcp.json
-```
-
-### 4. Set Environment Variables
-
-Create your `.env` file:
-
-```bash
-cp env.example .env
-# Edit .env with your tokens (see authentication sections below)
 ```
 
 ### 5. Restart Cursor
@@ -67,11 +75,37 @@ Restart Cursor completely for the servers to load.
 | `design-system` | Figma + GitHub                    | Design teams        | Design token management, component libraries |
 | `site-kit-wp`   | GitHub only                       | Site Kit developers | WordPress plugin development                 |
 
+### 🔧 Environment Variable Precedence
+
+The configuration generator intelligently handles environment variables:
+
+```bash
+# Your .env file values ALWAYS take precedence
+DEFAULT_GITHUB_OWNER=google          # Your personal setting
+DEFAULT_GITHUB_REPO=site-kit-wp      # Your personal setting
+
+# Even when using presets with different defaults:
+npm run generate:config -- --preset=frontend-dev
+# Result: Uses "google/site-kit-wp" from your .env, NOT preset defaults
+```
+
+**Priority Order:**
+
+1. **Your `.env` file** (highest priority)
+2. **Preset defaults** (only used if not in `.env`)
+3. **System environment variables** (fallback)
+
+This means you can safely use any preset while keeping your personal repository and team settings.
+
 ### ✅ Benefits of Automated Setup
 
-- **Zero Configuration Errors**: Generated configs are always valid
-- **Team Consistency**: Everyone gets the same optimized setup
-- **Easy Updates**: Regenerate configs when servers are updated
+- **Ready-to-Use Configs**: Generated configurations include your actual API tokens, no manual editing needed
+- **Smart Environment Handling**: Automatically reads `.env` files and validates all required variables
+- **Personal Settings Priority**: Your `.env` values always take precedence over preset defaults
+- **Zero Configuration Errors**: Generated configs are always valid with proper paths and syntax
+- **Team Consistency**: Everyone gets the same optimized setup with their personal tokens
+- **Selective Server Loading**: Only includes servers with valid authentication, prevents startup errors
+- **Easy Updates**: Regenerate configs when servers are updated or settings change
 - **Preset Optimization**: Configurations tuned for specific workflows
 - **Future-Proof**: Automatically includes new servers and features
 
@@ -363,45 +397,57 @@ Once setup is complete:
 
 ## Configuration Reference
 
-### Cursor MCP Configuration
+### Generated Cursor MCP Configuration
+
+When using the automated setup, the configuration generator creates files like this (with your actual values):
 
 ```json
 {
   "mcpServers": {
-    "github-dev-workflow": {
+    "github-frontend-dev": {
       "command": "node",
-      "args": ["/path/to/mcp-dev-workflow/servers/github/index.js"],
+      "args": ["/home/user/mcp-dev-workflow/servers/github/index.js"],
       "env": {
-        "GITHUB_TOKEN": "optional_token_here",
+        "GITHUB_TOKEN": "ghp_your_actual_token_here",
         "DEFAULT_GITHUB_OWNER": "google",
         "DEFAULT_GITHUB_REPO": "site-kit-wp"
       }
     },
-    "google-workspace": {
+    "google-workspace-frontend-dev": {
       "command": "node",
-      "args": ["/path/to/mcp-dev-workflow/servers/google-workspace/index.js"],
+      "args": ["/home/user/mcp-dev-workflow/servers/google-workspace/index.js"],
       "env": {
-        "GOOGLE_SERVICE_ACCOUNT_FILE": "/path/to/service-account.json"
+        "GOOGLE_CLIENT_ID": "your-actual-client-id.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "GOCSPX-your-actual-secret",
+        "GOOGLE_TOKEN_FILE": "/home/user/mcp-dev-workflow/.google-token.json"
       }
     },
-    "figma": {
+    "figma-frontend-dev": {
       "command": "node",
-      "args": ["/path/to/mcp-dev-workflow/servers/figma/index.js"],
+      "args": ["/home/user/mcp-dev-workflow/servers/figma/index.js"],
       "env": {
-        "FIGMA_ACCESS_TOKEN": "figd_your_token_here"
+        "FIGMA_ACCESS_TOKEN": "figd_your_actual_figma_token",
+        "DEFAULT_FIGMA_TEAM_ID": "852657679204900581",
+        "DEFAULT_FIGMA_PROJECT_ID": "16778977"
       }
     }
   }
 }
 ```
 
-### Environment Variables
+**Note:** The generator substitutes all `${VARIABLE_NAME}` placeholders with actual values from your `.env` file, so the final configuration is ready to use immediately.
+
+### Environment Variables (.env file)
+
+These are the variables you should set in your `.env` file. The configuration generator will automatically read and use these values:
 
 ```bash
-# GitHub (optional)
+# GitHub (optional for public repos, required for private repos)
 GITHUB_TOKEN=your_github_token
+DEFAULT_GITHUB_OWNER=google
+DEFAULT_GITHUB_REPO=site-kit-wp
 
-# Google Workspace (choose one)
+# Google Workspace (choose one authentication method)
 GOOGLE_SERVICE_ACCOUNT_FILE=/path/to/service-account.json
 GOOGLE_SERVICE_ACCOUNT_KEY={"type":"service_account",...}
 
@@ -412,8 +458,8 @@ GOOGLE_TOKEN_FILE=.google-token.json
 
 # Figma (required)
 FIGMA_ACCESS_TOKEN=figd_your_token
-
-# Optional defaults for simplified commands
 DEFAULT_FIGMA_TEAM_ID=your_team_id
 DEFAULT_FIGMA_PROJECT_ID=your_project_id
 ```
+
+The generator will substitute `${VARIABLE_NAME}` placeholders in the server configurations with these actual values.
