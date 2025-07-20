@@ -4,13 +4,16 @@ This guide provides practical examples and use cases for the GitHub MCP server t
 
 ## 🚀 Quick Reference
 
-| Tool                   | Purpose                      | Use When                                              |
-| ---------------------- | ---------------------------- | ----------------------------------------------------- |
-| `get_github_issue`     | Get detailed issue info      | Analyzing specific issues, understanding requirements |
-| `get_github_pr`        | Get detailed PR info         | Code review, understanding changes                    |
-| `list_github_issues`   | Browse repository issues     | Finding work items, tracking progress                 |
-| `list_github_prs`      | Browse repository PRs        | Monitoring reviews, checking status                   |
-| `search_github_issues` | Search issues/PRs by keyword | Finding related work, research                        |
+| Tool                      | Purpose                      | Use When                                              |
+| ------------------------- | ---------------------------- | ----------------------------------------------------- |
+| `get_github_issue`        | Get detailed issue info      | Analyzing specific issues, understanding requirements |
+| `get_github_pr`           | Get detailed PR info         | Code review, understanding changes                    |
+| `list_github_issues`      | Browse repository issues     | Finding work items, tracking progress                 |
+| `list_github_prs`         | Browse repository PRs        | Monitoring reviews, checking status                   |
+| `search_github_issues`    | Search issues/PRs by keyword | Finding related work, research                        |
+| `get_google_doc`          | Read Google Docs content     | Extract design docs, specs, meeting notes             |
+| `get_google_doc_metadata` | Get document properties      | Check sharing settings, modification dates            |
+| `search_google_doc`       | Search text within docs      | Find specific sections or references                  |
 
 ## 🎯 Default Repository Configuration
 
@@ -20,7 +23,7 @@ This server is configured with a **default repository** (`google/site-kit-wp`), 
 
 **Using defaults (recommended for site-kit-wp):**
 
-- "Show me issue 10988" → Uses default `google/site-kit-wp`
+- "Show me issue 2345" → Uses default `google/site-kit-wp`
 - "Get PR 1234" → Uses default `google/site-kit-wp`
 - "List recent issues" → Uses default `google/site-kit-wp`
 - "Search for storybook issues" → Uses default `google/site-kit-wp`
@@ -54,9 +57,9 @@ Instead of technical tool calls, you can say:
 
 **Getting Issues:**
 
-- "Show me issue 10988" (uses default repo)
+- "Show me issue 2345" (uses default repo)
 - "What's the details on issue 11117?" (uses default repo)
-- "Get me the information about issue 10988 from google/site-kit-wp" (explicit repo)
+- "Get me the information about issue 2345 from google/site-kit-wp" (explicit repo)
 
 **Browsing Issues/PRs:**
 
@@ -83,7 +86,7 @@ Instead of technical tool calls, you can say:
 **Be Specific About:**
 
 - **Repository**: "google/site-kit-wp" or just "site-kit-wp" (context helps)
-- **Numbers**: "issue 10988" or "PR #1234"
+- **Numbers**: "issue 2345" or "PR #1234"
 - **Scope**: "recent", "open", "closed", "last 5"
 
 **Natural Phrases That Work:**
@@ -96,7 +99,7 @@ Instead of technical tool calls, you can say:
 **Examples in Context:**
 
 ```
-You: "I'm working on issue 10988, can you show me the details?"
+You: "I'm working on issue 2345, can you show me the details?"
 AI: [Uses get_github_issue tool automatically]
 
 You: "Are there any other issues related to storybook in this repo?"
@@ -131,7 +134,7 @@ Just **describe what you want** and let the AI handle the technical details!
 
 ```
 get_github_issue with:
-- issue_number: 10988
+- issue_number: 2345
 ```
 
 **Full syntax (for other repos):**
@@ -140,7 +143,7 @@ get_github_issue with:
 get_github_issue with:
 - owner: "google"
 - repo: "site-kit-wp"
-- issue_number: 10988
+- issue_number: 2345
 ```
 
 **What you'll get:**
@@ -270,7 +273,7 @@ search_github_issues with:
 
 ```bash
 # 1. Get the main issue details
-get_github_issue → owner: "google", repo: "site-kit-wp", issue_number: 10988
+get_github_issue → owner: "google", repo: "site-kit-wp", issue_number: 2345
 
 # 2. Search for related issues
 search_github_issues → query: "inline data refactor", type: "both"
@@ -428,6 +431,76 @@ query: "label:\"Team M\""
    ```
    list_github_issues → owner: "google", repo: "site-kit-wp", per_page: 1
    ```
+
+---
+
+## 📄 Google Workspace Tools
+
+The Google Workspace MCP server provides tools for reading and interacting with Google Docs, Sheets, Gmail, and other Google Workspace applications.
+
+### Available Tools
+
+| Tool                      | Purpose                  | Use When                                   |
+| ------------------------- | ------------------------ | ------------------------------------------ |
+| `get_google_doc`          | Read Google Docs content | Extract design docs, specs, meeting notes  |
+| `get_google_doc_metadata` | Get document properties  | Check sharing settings, modification dates |
+| `search_google_doc`       | Search text within docs  | Find specific sections or references       |
+
+### Natural Language Examples
+
+**Reading Google Docs:**
+
+- "Read the design doc at https://docs.google.com/document/d/1CzPZhhs..."
+- "Show me the content of that Google Doc"
+- "Get the document at [Google Docs URL]"
+
+**Document Search:**
+
+- "Search for 'authentication' in the design document"
+- "Find mentions of 'API endpoints' in that Google Doc"
+- "Look for 'database schema' in the technical specification"
+
+**Document Metadata:**
+
+- "What's the metadata for this document?"
+- "When was this Google Doc last modified?"
+- "Who has access to this document?"
+
+### Technical Examples
+
+**Reading a Document:**
+
+```
+get_google_doc with:
+- document_id: "https://docs.google.com/document/d/1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0/"
+- format: "structured"
+```
+
+**Searching Within a Document:**
+
+```
+search_google_doc with:
+- document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0"
+- search_text: "authentication flow"
+- context_lines: 3
+```
+
+### Setup Requirements
+
+To use Google Workspace tools, you need to set up authentication:
+
+1. **Service Account** (recommended for teams)
+2. **OAuth2** (for personal use)
+
+See the [Google Workspace Server README](servers/google-workspace/README.md) for detailed setup instructions.
+
+### Future Capabilities
+
+The server is designed to be extensible. Planned additions include:
+
+- **Google Sheets**: Read spreadsheet data, search across sheets
+- **Gmail**: Search emails, read conversations
+- **Google Drive**: Browse files, check permissions
 
 ## 🚀 Next Steps
 

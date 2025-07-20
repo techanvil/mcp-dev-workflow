@@ -10,6 +10,19 @@
         "DEFAULT_GITHUB_OWNER": "google",
         "DEFAULT_GITHUB_REPO": "site-kit-wp"
       }
+    },
+    "google-workspace": {
+      "command": "node",
+      "args": [
+        "/home/tom/git/techanvil/mcp-dev-workflow/servers/google-workspace/index.js"
+      ],
+      "env": {
+        "GOOGLE_SERVICE_ACCOUNT_KEY": "",
+        "GOOGLE_SERVICE_ACCOUNT_FILE": "",
+        "GOOGLE_CLIENT_ID": "",
+        "GOOGLE_CLIENT_SECRET": "",
+        "GOOGLE_TOKEN_FILE": ""
+      }
     }
   }
 }

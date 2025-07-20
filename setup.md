@@ -30,11 +30,11 @@ Get a token at: https://github.com/settings/tokens
 After restarting Cursor, you should see the GitHub MCP tools available. Test with:
 
 ```javascript
-// Get issue #10988 from site-kit-wp
+// Get issue #2345 from site-kit-wp
 get_github_issue({
   owner: "google",
   repo: "site-kit-wp",
-  issue_number: 10988,
+  issue_number: 2345,
 });
 ```
 

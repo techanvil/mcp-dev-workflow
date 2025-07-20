@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "start:github": "node servers/github/index.js",
+    "start:google-workspace": "node servers/google-workspace/index.js",
+    "auth:google": "node google-auth-setup.js",
+    "test:setup": "node test-setup.js",
     "dev": "npm run start:github"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "octokit": "^4.0.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "googleapis": "^144.0.0",
+    "octokit": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0"
@@ -18,6 +22,8 @@
   "keywords": [
     "mcp",
     "github",
+    "google-workspace",
+    "google-docs",
     "development",
     "workflow"
   ],

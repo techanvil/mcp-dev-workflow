@@ -6,7 +6,7 @@ _Exported on 7/18/2025 at 14:21:34 GMT+1 from Cursor (1.1.3)_
 
 **User**
 
-I want to create an MCP server that will allow Cursor to read issues and PRs from @https://github.com/google/site-kit-wp/issues/10988 . I don't want to use the built-in GitHub integration because it will take too long to get approval for access.
+I want to create an MCP server that will allow Cursor to read issues and PRs from @https://github.com/google/site-kit-wp . I don't want to use the built-in GitHub integration because it will take too long to get approval for access.
 
 I've created the `dev-workflow-mcp` as a stub to build this in. I would also like to add more MCP servers as time goes on so let's make it scalable. @README.md
 
@@ -613,7 +613,7 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 {
   "owner": "google",
   "repo": "site-kit-wp",
-  "issue_number": 10988
+  "issue_number": 2345
 }
 ```
 
@@ -752,7 +752,7 @@ try {
   console.log("3. Restart Cursor to load the new MCP server");
   console.log("\nExample usage:");
   console.log(
-    '- get_github_issue: owner="google", repo="site-kit-wp", issue_number=10988'
+    '- get_github_issue: owner="google", repo="site-kit-wp", issue_number=2345'
   );
   console.log(
     '- list_github_issues: owner="google", repo="site-kit-wp", state="open"'
@@ -805,11 +805,11 @@ Get a token at: https://github.com/settings/tokens
 After restarting Cursor, you should see the GitHub MCP tools available. Test with:
 
 ```javascript
-// Get issue #10988 from site-kit-wp
+// Get issue #2345 from site-kit-wp
 get_github_issue({
   owner: "google",
   repo: "site-kit-wp",
-  issue_number: 10988,
+  issue_number: 2345,
 });
 ```
 
@@ -856,7 +856,7 @@ Your `dev-workflow-mcp` now includes:
 
 1. **Add to Cursor**: Copy content from `cursor-mcp-config.json` to `~/.cursor/mcp.json`
 2. **Restart Cursor** to load the new MCP server
-3. **Start using**: Try `get_github_issue` with `owner: "google"`, `repo: "site-kit-wp"`, `issue_number: 10988`
+3. **Start using**: Try `get_github_issue` with `owner: "google"`, `repo: "site-kit-wp"`, `issue_number: 2345`
 
 ## 💡 Key Benefits:
 - ✅ **Works immediately** with public repos (no GitHub token required)

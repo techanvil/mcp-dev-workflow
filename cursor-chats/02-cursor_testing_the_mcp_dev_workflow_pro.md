@@ -61,7 +61,7 @@ Once Cursor restarts, you should be able to use these tools right here in this c
 **1. Get the specific issue you mentioned:**
 
 ```
-get_github_issue with owner="google", repo="site-kit-wp", issue_number=10988
+get_github_issue with owner="google", repo="site-kit-wp", issue_number=2345
 ```
 
 **2. List recent issues from site-kit-wp:**
@@ -85,7 +85,7 @@ list_github_prs with owner="google", repo="site-kit-wp", state="open", per_page=
 ### Step 3: Optional - Add GitHub Token for Higher Rate Limits
 
 ```plaintext
-get_github_issue with owner="google", repo="site-kit-wp", issue_number=10988
+get_github_issue with owner="google", repo="site-kit-wp", issue_number=2345
 ```
 
 ```plaintext
@@ -113,7 +113,7 @@ Your MCP server provides these 5 powerful tools:
 
 | Tool                   | Purpose                 | Example Use                    |
 | ---------------------- | ----------------------- | ------------------------------ |
-| `get_github_issue`     | Get detailed issue info | Issue #10988 analysis          |
+| `get_github_issue`     | Get detailed issue info | Issue #2345 analysis           |
 | `get_github_pr`        | Get detailed PR info    | Review specific PRs            |
 | `list_github_issues`   | List repository issues  | Recent open issues             |
 | `list_github_prs`      | List repository PRs     | Current PRs in review          |
@@ -167,7 +167,7 @@ However, let's try the reload first since it's faster:
 
 After reloading/restarting, come back to this chat and I'll test the MCP server for you! Just ask me to:
 
-- "Get issue 10988 from google/site-kit-wp"
+- "Get issue 2345 from google/site-kit-wp"
 - "List recent issues from site-kit-wp"
 
 If I can successfully use the GitHub MCP tools, then the reload worked. If I get errors like "tool not available," then you'll need the full restart.
@@ -324,7 +324,7 @@ get_github_issue with:
 
 - owner: "google"
 - repo: "site-kit-wp"
-- issue_number: 10988
+- issue_number: 2345
 
 ```
 
@@ -442,7 +442,7 @@ search_github_issues with:
 
 ```bash
 # 1. Get the main issue details
-get_github_issue → owner: "google", repo: "site-kit-wp", issue_number: 10988
+get_github_issue → owner: "google", repo: "site-kit-wp", issue_number: 2345
 
 # 2. Search for related issues
 search_github_issues → query: "inline data refactor", type: "both"
@@ -682,9 +682,9 @@ The beauty of MCP tools is that you can interact with them using **natural langu
 Instead of technical tool calls, you can say:
 
 **Getting Issues:**
-- "Show me issue 10988 from google/site-kit-wp"
+- "Show me issue 2345 from google/site-kit-wp"
 - "What's the details on site-kit-wp issue #11117?"
-- "Get me the information about issue 10988"
+- "Get me the information about issue 2345"
 
 **Browsing Issues/PRs:**
 - "List the recent open issues from site-kit-wp"
@@ -707,7 +707,7 @@ Instead of technical tool calls, you can say:
 
 **Be Specific About:**
 - **Repository**: "google/site-kit-wp" or just "site-kit-wp" (context helps)
-- **Numbers**: "issue 10988" or "PR #1234"
+- **Numbers**: "issue 2345" or "PR #1234"
 - **Scope**: "recent", "open", "closed", "last 5"
 
 **Natural Phrases That Work:**
@@ -719,7 +719,7 @@ Instead of technical tool calls, you can say:
 **Examples in Context:**
 ````
 
-You: "I'm working on issue 10988, can you show me the details?"
+You: "I'm working on issue 2345, can you show me the details?"
 AI: [Uses get_github_issue tool automatically]
 
 You: "Are there any other issues related to storybook in this repo?"
@@ -761,7 +761,7 @@ Perfect! ✅ I've added a comprehensive **"Natural Language Usage"** section to 
 
 **🗣️ Natural Examples:**
 
-- "Show me issue 10988 from google/site-kit-wp"
+- "Show me issue 2345 from google/site-kit-wp"
 - "Search for storybook-related issues in site-kit-wp"
 - "What pull requests are currently open for review?"
 
@@ -782,13 +782,13 @@ Perfect! ✅ I've added a comprehensive **"Natural Language Usage"** section to 
 **Before:** Users had to remember technical syntax like:
 
 ```
-get_github_issue with owner="google", repo="site-kit-wp", issue_number=10988
+get_github_issue with owner="google", repo="site-kit-wp", issue_number=2345
 ```
 
 **Now:** Users can simply say:
 
 ```
-"Show me issue 10988 from site-kit-wp"
+"Show me issue 2345 from site-kit-wp"
 ```
 
 The documentation now shows users that they can **talk naturally** to you (the AI) and you'll automatically translate their requests into the appropriate MCP tool calls. This makes the GitHub MCP server much more accessible and user-friendly! 🚀
@@ -796,9 +796,9 @@ The documentation now shows users that they can **talk naturally** to you (the A
 **Try it yourself:** "Find any issues about dashboard sharing in site-kit-wp" - and I'll automatically use the search tool for you!
 
 ```plaintext
-get_github_issue with owner="google", repo="site-kit-wp", issue_number=10988
+get_github_issue with owner="google", repo="site-kit-wp", issue_number=2345
 ```
 
 ```plaintext
-"Show me issue 10988 from site-kit-wp"
+"Show me issue 2345 from site-kit-wp"
 ```

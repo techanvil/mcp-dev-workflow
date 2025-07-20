@@ -16,6 +16,25 @@
         "list_github_prs",
         "search_github_issues"
       ]
+    },
+    "google-workspace": {
+      "name": "Google Workspace MCP Server",
+      "description": "Provides tools for reading Google Docs, Sheets, Gmail, and other Google Workspace applications",
+      "command": "node",
+      "args": ["servers/google-workspace/index.js"],
+      "env": {
+        "GOOGLE_SERVICE_ACCOUNT_KEY": "${GOOGLE_SERVICE_ACCOUNT_KEY}",
+        "GOOGLE_SERVICE_ACCOUNT_FILE": "${GOOGLE_SERVICE_ACCOUNT_FILE}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}",
+        "GOOGLE_TOKEN_FILE": "${GOOGLE_TOKEN_FILE}"
+      },
+      "capabilities": ["tools"],
+      "tools": [
+        "get_google_doc",
+        "get_google_doc_metadata",
+        "search_google_doc"
+      ]
     }
   },
   "presets": {

@@ -643,7 +643,7 @@ This server is configured with a **default repository** (`google/site-kit-wp`), 
 
 **Using defaults (recommended for site-kit-wp):**
 
-- "Show me issue 10988" → Uses default `google/site-kit-wp`
+- "Show me issue 2345" → Uses default `google/site-kit-wp`
 - "Get PR 1234" → Uses default `google/site-kit-wp`
 - "List recent issues" → Uses default `google/site-kit-wp`
 - "Search for storybook issues" → Uses default `google/site-kit-wp`
@@ -676,32 +676,32 @@ The beauty of MCP tools is that you can interact with them using **natural langu
 
 ```markdown
 **Getting Issues:**
-- "Show me issue 10988 from google/site-kit-wp"
+- "Show me issue 2345 from google/site-kit-wp"
 - "What's the details on site-kit-wp issue #11117?"
-- "Get me the information about issue 10988"
+- "Get me the information about issue 2345"
 
 ->
 
 **Getting Issues:**
-- "Show me issue 10988" (uses default repo)
+- "Show me issue 2345" (uses default repo)
 - "What's the details on issue 11117?" (uses default repo)
-- "Get me the information about issue 10988 from google/site-kit-wp" (explicit repo)
+- "Get me the information about issue 2345 from google/site-kit-wp" (explicit repo)
 ````
 
 ```markdown
 **Getting Issues:**
 
-- "Show me issue 10988 from google/site-kit-wp"
+- "Show me issue 2345 from google/site-kit-wp"
 - "What's the details on site-kit-wp issue #11117?"
-- "Get me the information about issue 10988"
+- "Get me the information about issue 2345"
 
 ->
 
 **Getting Issues:**
 
-- "Show me issue 10988" (uses default repo)
+- "Show me issue 2345" (uses default repo)
 - "What's the details on issue 11117?" (uses default repo)
-- "Get me the information about issue 10988 from google/site-kit-wp" (explicit repo)
+- "Get me the information about issue 2345 from google/site-kit-wp" (explicit repo)
 ```
 
 ```markdown
@@ -818,7 +818,7 @@ get_github_issue with:
 
 - owner: "google"
 - repo: "site-kit-wp"
-- issue_number: 10988
+- issue_number: 2345
 
 ```
 
@@ -833,7 +833,7 @@ get_github_issue with:
 
 get_github_issue with:
 
-- issue_number: 10988
+- issue_number: 2345
 
 ```
 
@@ -844,7 +844,7 @@ get_github_issue with:
 
 - owner: "google"
 - repo: "site-kit-wp"
-- issue_number: 10988
+- issue_number: 2345
 
 ```
 
@@ -969,20 +969,20 @@ Perfect! ✅ I've successfully implemented **default repository configuration** 
 ### **Before (always required):**
 
 ```
-"Show me issue 10988 from google/site-kit-wp"
+"Show me issue 2345 from google/site-kit-wp"
 ```
 
 ### **After (simplified):**
 
 ```
-"Show me issue 10988" ← Uses default repo automatically!
+"Show me issue 2345" ← Uses default repo automatically!
 ```
 
 ## 📋 Available Simplified Commands:
 
 **Issues & PRs by number:**
 
-- "Show me issue 10988"
+- "Show me issue 2345"
 - "Get PR 1234"
 - "What's in issue 11117?"
 
@@ -1010,7 +1010,7 @@ You can still override defaults for other repositories:
 
 Let's test the simplified syntax right now! Try asking me:
 
-**"Show me issue 10988"** ← This should now work with just the number!
+**"Show me issue 2345"** ← This should now work with just the number!
 
 The server will automatically use `google/site-kit-wp` as the default repository, making your workflow much more efficient for day-to-day site-kit-wp development work. 🎉
 
@@ -1023,26 +1023,26 @@ The server will automatically use `google/site-kit-wp` as the default repository
 ```
 
 ```plaintext
-"Show me issue 10988 from google/site-kit-wp"
+"Show me issue 2345 from google/site-kit-wp"
 ```
 
 ```plaintext
-"Show me issue 10988" ← Uses default repo automatically!
+"Show me issue 2345" ← Uses default repo automatically!
 ```
 
 ---
 
 **User**
 
-Show me issue 10988
+Show me issue 2345
 
 ---
 
 **Cursor**
 
-🎉 **Perfect! The default repository configuration is working!** I successfully retrieved issue #10988 using just the issue number.
+🎉 **Perfect! The default repository configuration is working!** I successfully retrieved issue #2345 using just the issue number.
 
-# Issue #10988: Refactor and consolidate all module inline data into a single method
+# Issue #2345: Refactor and consolidate all module inline data into a single method
 
 ## 📋 Overview
 
@@ -1094,7 +1094,7 @@ Three modules successfully refactored:
 
 ## 🔗 Links
 
-- **GitHub:** https://github.com/google/site-kit-wp/issues/10988
+- **GitHub:** https://github.com/google/site-kit-wp/issues/2345
 - **Related:** Issue #10165 (original proposal)
 
 ---

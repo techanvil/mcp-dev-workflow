@@ -24,6 +24,29 @@ Provides tools for reading GitHub issues, pull requests, and repository informat
 - `list_github_prs` - List pull requests from a GitHub repository
 - `search_github_issues` - Search issues and PRs in a GitHub repository
 
+### Google Workspace MCP Server
+
+Provides tools for reading and interacting with Google Docs, Sheets, Gmail, and other Google Workspace applications through natural language commands.
+
+**Current Features:**
+
+- **Google Docs**: Read document content, search within docs, get metadata
+- **Multiple Formats**: Plain text, Markdown, or structured output
+- **Smart URL Parsing**: Works with Google Docs URLs or document IDs
+- **Advanced Search**: Find text with context highlighting
+
+**Tools:**
+
+- `get_google_doc` - Read and extract content from Google Docs
+- `get_google_doc_metadata` - Get document properties and sharing info
+- `search_google_doc` - Search for text within documents
+
+**Planned Features:**
+
+- **Google Sheets**: Read spreadsheet data, search across sheets
+- **Gmail**: Search emails, read conversations, extract attachments
+- **Google Drive**: Browse files, check permissions, search across file types
+
 ## Installation
 
 1. Clone this repository:
@@ -69,16 +92,28 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 ```json
 {
   "mcpServers": {
-    "github": {
+    "github-dev-workflow": {
       "command": "node",
       "args": ["/path/to/mcp-dev-workflow/servers/github/index.js"],
       "env": {
-        "GITHUB_TOKEN": "your_token_here"
+        "GITHUB_TOKEN": "your_token_here",
+        "DEFAULT_GITHUB_OWNER": "google",
+        "DEFAULT_GITHUB_REPO": "site-kit-wp"
+      }
+    },
+    "google-workspace": {
+      "command": "node",
+      "args": ["/path/to/mcp-dev-workflow/servers/google-workspace/index.js"],
+      "env": {
+        "GOOGLE_SERVICE_ACCOUNT_KEY": "",
+        "GOOGLE_SERVICE_ACCOUNT_FILE": "/path/to/service-account.json"
       }
     }
   }
 }
 ```
+
+Or copy the configuration from `cursor-mcp-config.json` and update the paths for your system.
 
 ## Usage Examples
 
@@ -89,7 +124,7 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 {
   "owner": "google",
   "repo": "site-kit-wp",
-  "issue_number": 10988
+  "issue_number": 2345
 }
 ```
 
@@ -117,6 +152,43 @@ To use these MCP servers with Cursor, add them to your MCP configuration file (`
 }
 ```
 
+### Reading a Google Doc
+
+```javascript
+// Tool: get_google_doc
+{
+  "document_id": "https://docs.google.com/document/d/1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0/",
+  "format": "structured"
+}
+```
+
+### Searching Within a Google Doc
+
+```javascript
+// Tool: search_google_doc
+{
+  "document_id": "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0",
+  "search_text": "authentication flow",
+  "context_lines": 3
+}
+```
+
+### Natural Language Examples
+
+Instead of technical syntax, you can use natural language:
+
+**GitHub:**
+
+- "Show me issue 2345" (uses default repo)
+- "List recent open issues"
+- "Search for storybook issues"
+
+**Google Workspace:**
+
+- "Read the design doc at [Google Docs URL]"
+- "Search for 'authentication' in that document"
+- "What's the metadata for this Google Doc?"
+
 ## Development
 
 ### Running Servers Locally
@@ -125,6 +197,18 @@ To test the GitHub server:
 
 ```bash
 npm run start:github
+```
+
+To test the Google Workspace server:
+
+```bash
+npm run start:google-workspace
+```
+
+To set up Google Workspace authentication:
+
+```bash
+npm run auth:google
 ```
 
 ### Adding New Servers
