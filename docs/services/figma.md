@@ -137,7 +137,7 @@ get_figma_components with:
 
 Instead of technical tool calls, you can use natural language:
 
-- "What are the brand colors from this Figma file: https://figma.com/file/ABC123/design-system"
+- "What are the brand colors from this Figma file: https://www.figma.com/file/ABC123/design-system"
 - "Export all icons from the UI kit as SVG files"
 - "Show me the latest comments on the checkout flow design"
 - "What components are available in the design system?"

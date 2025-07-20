@@ -9,7 +9,7 @@ Comprehensive documentation for the MCP Dev Workflow project.
 Complete setup and configuration instructions:
 
 - **[Setup Guide](setup/README.md)** - Installation, authentication, and troubleshooting
-- Step-by-step instructions for both GitHub and Google Workspace servers
+- Step-by-step instructions for GitHub, Google Workspace, and Figma servers
 - Authentication options and environment configuration
 
 ### 📖 [Usage](usage/)
@@ -25,7 +25,7 @@ Detailed usage patterns and command reference:
 Real-world scenarios and workflows:
 
 - **[Examples & Workflows](examples/README.md)** - Development scenarios and use cases
-- Cross-service workflows combining GitHub and Google Workspace
+- Cross-service workflows combining GitHub, Google Workspace, and Figma
 - Pro tips and advanced patterns
 
 ### 🔧 [Services](services/)

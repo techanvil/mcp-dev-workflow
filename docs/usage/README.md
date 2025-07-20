@@ -326,7 +326,7 @@ All Figma operations require a personal access token:
 
 ```bash
 # Get file structure and basic information
-"Show me the structure of this Figma file: https://figma.com/file/ABC123/design-system"
+"Show me the structure of this Figma file: https://www.figma.com/file/ABC123/design-system"
 
 # Extract comments and feedback
 "What are the latest comments on the checkout flow design?"
@@ -384,7 +384,7 @@ https://www.figma.com/file/FILE_KEY/file-name
 
 You can use:
 
-- **Full URL**: "Get tokens from https://figma.com/file/ABC123/design-system"
+- **Full URL**: "Get tokens from https://www.figma.com/file/ABC123/design-system"
 - **File Key only**: "Get tokens from file ABC123"
 - **Natural references**: "Get tokens from the design system file" (if previously mentioned)
 

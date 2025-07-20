@@ -44,7 +44,7 @@ This section provides real-world examples and common workflows using the MCP ser
 
 ```bash
 # Read design files and extract information
-"Get the structure of this Figma file: https://figma.com/file/ABC123/design-system"
+"Get the structure of this Figma file: https://www.figma.com/file/ABC123/design-system"
 "What components are available in the design library?"
 "Show me the latest comments on the checkout flow design"
 
