@@ -50,7 +50,7 @@ Detailed service-specific documentation:
 
 ### Common Tasks
 
-- **Authentication**: [Setup → Authentication](setup/README.md#google-workspace-setup)
+- **Authentication**: [Setup → Google Workspace Setup](setup/README.md#google-workspace-setup)
 - **Troubleshooting**: [Setup → Troubleshooting](setup/README.md#troubleshooting)
 - **Workflows**: [Examples → Real-World Workflows](examples/README.md#real-world-workflows)
 

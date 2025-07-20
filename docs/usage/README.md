@@ -158,14 +158,14 @@ search_github_issues with:
 
 ```bash
 get_google_doc with:
-- document_id: "https://docs.google.com/document/d/1CzPZhhs.../"
+- document_id: "https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 - format: "structured"  # "plain", "markdown", or "structured"
 ```
 
 **Document ID formats:**
 
 - Full URL: `https://docs.google.com/document/d/DOCUMENT_ID/`
-- Document ID only: `1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0`
+- Document ID only: `1ABC2def3GHI4jkl5MNO6pqr7STU8vwx9YZA0BCD1EF`
 - Shared links with parameters
 
 **Output formats:**
@@ -180,7 +180,7 @@ get_google_doc with:
 
 ```bash
 get_google_doc_metadata with:
-- document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0"
+- document_id: "1ABC2def3GHI4jkl5MNO6pqr7STU8vwx9YZA0BCD1EF"
 ```
 
 **What you get:**
@@ -197,7 +197,7 @@ get_google_doc_metadata with:
 
 ```bash
 search_google_doc with:
-- document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0"
+- document_id: "1ABC2def3GHI4jkl5MNO6pqr7STU8vwx9YZA0BCD1EF"
 - search_text: "authentication flow"
 - context_lines: 3  # Lines of context around matches
 ```

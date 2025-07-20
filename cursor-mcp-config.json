@@ -2,9 +2,7 @@
   "mcpServers": {
     "github-dev-workflow": {
       "command": "node",
-      "args": [
-        "/home/tom/git/techanvil/mcp-dev-workflow/servers/github/index.js"
-      ],
+      "args": ["/path/to/mcp-dev-workflow/servers/github/index.js"],
       "env": {
         "GITHUB_TOKEN": "",
         "DEFAULT_GITHUB_OWNER": "google",
@@ -13,9 +11,7 @@
     },
     "google-workspace": {
       "command": "node",
-      "args": [
-        "/home/tom/git/techanvil/mcp-dev-workflow/servers/google-workspace/index.js"
-      ],
+      "args": ["/path/to/mcp-dev-workflow/servers/google-workspace/index.js"],
       "env": {
         "GOOGLE_SERVICE_ACCOUNT_KEY": "",
         "GOOGLE_SERVICE_ACCOUNT_FILE": "",

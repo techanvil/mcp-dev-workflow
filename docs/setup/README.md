@@ -47,7 +47,7 @@ Once Cursor restarts, test both servers:
 
 **Google Workspace Tools (requires authentication):**
 
-- "Read the design doc at https://docs.google.com/document/d/1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0/"
+- "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 
 ## GitHub Setup
 

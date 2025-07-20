@@ -65,7 +65,7 @@ Restart Cursor completely for MCP servers to load.
 
 **Google Workspace (requires authentication):**
 
-- "Read the design doc at https://docs.google.com/document/d/1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0/"
+- "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 - "Search for 'authentication' in that document"
 
 ## 💬 Natural Language Usage

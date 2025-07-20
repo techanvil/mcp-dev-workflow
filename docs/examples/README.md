@@ -27,7 +27,7 @@ This section provides real-world examples and common workflows using the MCP ser
 
 ```bash
 # Read documents
-"Read the design doc at https://docs.google.com/document/d/1CzPZhhs.../"
+"Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 "Show me the content of that Google Doc in markdown format"
 
 # Search within documents
@@ -261,9 +261,9 @@ Context about token refresh
 
 ```bash
 # All of these work:
-"Read https://docs.google.com/document/d/1CzPZhhs.../edit"
-"Read https://docs.google.com/document/d/1CzPZhhs.../"
-"Read document 1CzPZhhs..."
+"Read https://docs.google.com/document/d/YOUR_DOCUMENT_ID/edit"
+"Read https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
+"Read document YOUR_DOCUMENT_ID"
 ```
 
 **Format Selection:**
@@ -349,12 +349,12 @@ search_github_issues({
 ```javascript
 // Direct tool usage (if needed)
 get_google_doc({
-  document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0",
+  document_id: "YOUR_DOCUMENT_ID",
   format: "markdown",
 });
 
 search_google_doc({
-  document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0",
+  document_id: "YOUR_DOCUMENT_ID",
   search_text: "authentication flow",
   context_lines: 5,
 });

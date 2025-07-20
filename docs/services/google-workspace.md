@@ -117,11 +117,11 @@ A comprehensive Model Context Protocol (MCP) server for Google Workspace applica
 ```bash
 # Simple URL or ID
 get_google_doc with:
-- document_id: "https://docs.google.com/document/d/1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0/"
+- document_id: "https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 
 # Different output formats
 get_google_doc with:
-- document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0"
+- document_id: "YOUR_DOCUMENT_ID"
 - format: "markdown"
 ```
 
@@ -129,7 +129,7 @@ get_google_doc with:
 
 Instead of technical tool calls, you can use natural language:
 
-- "Read the design doc at https://docs.google.com/document/d/1CzPZhhs..."
+- "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 - "Show me the content of that Google Doc"
 - "Search for 'authentication' in the design document"
 - "What's the metadata for this document?"
@@ -138,7 +138,7 @@ Instead of technical tool calls, you can use natural language:
 
 ```bash
 search_google_doc with:
-- document_id: "1CzPZhhsSlyfp718k2gSqMN-zHJdZ8Sr5eJcciZas2A0"
+- document_id: "YOUR_DOCUMENT_ID"
 - search_text: "authentication flow"
 - context_lines: 3
 ```
