@@ -6,7 +6,9 @@
       "command": "node",
       "args": ["servers/github/index.js"],
       "env": {
-        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "DEFAULT_GITHUB_OWNER": "${DEFAULT_GITHUB_OWNER}",
+        "DEFAULT_GITHUB_REPO": "${DEFAULT_GITHUB_REPO}"
       },
       "capabilities": ["tools"],
       "tools": [
