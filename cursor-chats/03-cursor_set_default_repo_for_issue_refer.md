@@ -1034,15 +1034,15 @@ The server will automatically use `google/site-kit-wp` as the default repository
 
 **User**
 
-Show me issue 2345
+Show me issue 10988
 
 ---
 
 **Cursor**
 
-🎉 **Perfect! The default repository configuration is working!** I successfully retrieved issue #2345 using just the issue number.
+🎉 **Perfect! The default repository configuration is working!** I successfully retrieved issue #10988 using just the issue number.
 
-# Issue #2345: Refactor and consolidate all module inline data into a single method
+# Issue #10988: Refactor and consolidate all module inline data into a single method
 
 ## 📋 Overview
 
@@ -1094,7 +1094,7 @@ Three modules successfully refactored:
 
 ## 🔗 Links
 
-- **GitHub:** https://github.com/google/site-kit-wp/issues/2345
+- **GitHub:** https://github.com/google/site-kit-wp/issues/10988
 - **Related:** Issue #10165 (original proposal)
 
 ---
