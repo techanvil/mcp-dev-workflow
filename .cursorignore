@@ -1,0 +1,2 @@
+# Stop Cursor from trying to update chat logs. These can be included directly as needed for context.
+cursor-chats
