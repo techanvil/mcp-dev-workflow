@@ -43,25 +43,32 @@ This section provides real-world examples and common workflows using the MCP ser
 ### Figma Examples
 
 ```bash
-# Read design files (full URL or file reference both work)
-"Get the structure of this Figma file: https://www.figma.com/file/ABC123/design-system"
-"Get tokens from Figma file design-system"
-"Show me the latest comments on Figma file checkout-flow"
+# Read design files (requires full URL or design ID)
+"Get the structure of this Figma file: https://www.figma.com/design/ABC123def456/design-system"
+"Get tokens from Figma file https://www.figma.com/design/XYZ789abc123/checkout-flow"
+"Show me the latest comments on https://www.figma.com/design/DEF456ghi789/feature-designs"
+
+# You can also use just the design ID (the part after /design/ in the URL)
+"Get design tokens from design ID ABC123def456 as CSS custom properties"
+"Export icons from design ID XYZ789abc123 as SVG files"
+
+# Example: From https://www.figma.com/design/SquElvNorSTJOTV1I7oYAq/Setup-flow-refresh?node-id=0-1&p=f&m=dev
+# → Use either the full URL or just "SquElvNorSTJOTV1I7oYAq"
 
 # Extract design tokens for development
-"Get all brand colors from Figma file design-system as CSS custom properties"
-"Export typography tokens from Figma file UI-kit as SCSS variables"
-"Get spacing tokens from the design file as JSON"
+"Get all brand colors from https://www.figma.com/file/ABC123def456/design-system as CSS custom properties"
+"Export typography tokens from https://www.figma.com/file/UIK789xyz456/UI-kit as SCSS variables"
+"Get spacing tokens from file key ABC123def456 as JSON"
 
 # Export assets for implementation
-"Export all icons from Figma file UI-kit as SVG files"
-"Download the logo assets from Figma file brand-assets as PNG files"
-"Export button component assets for development"
+"Export all icons from https://www.figma.com/file/UIK789xyz456/UI-kit as SVG files"
+"Download the logo assets from file key BRA456brand789 as PNG files"
+"Export button component assets from https://www.figma.com/file/ABC123def456/design-system"
 
 # Search and discover design elements
-"Find all navigation components in Figma file design-system"
-"Search for error state designs in Figma file component-library"
-"What button variations are available in the design file?"
+"Find all navigation components in https://www.figma.com/file/ABC123def456/design-system"
+"Search for error state designs in file key COM789library456"
+"What button variations are available in https://www.figma.com/file/ABC123def456/design-system?"
 ```
 
 ## 🔄 Real-World Workflows
@@ -176,25 +183,25 @@ This section provides real-world examples and common workflows using the MCP ser
 **Scenario:** Implementing a new UI component from Figma designs
 
 ```bash
-1. "Get the design tokens from Figma file design-system as CSS custom properties"
+1. "Get the design tokens from https://www.figma.com/file/ABC123def456/design-system as CSS custom properties"
    → Extract color, typography, and spacing values
 
-2. "What components are available in the design system?"
+2. "What components are available in https://www.figma.com/file/ABC123def456/design-system?"
    → Understand existing component library
 
-3. "Show me the button component specifications"
+3. "Show me the button component specifications in file key ABC123def456"
    → Get detailed component requirements
 
-4. "Export all icon assets as SVG files"
+4. "Export all icon assets from https://www.figma.com/file/ABC123def456/design-system as SVG files"
    → Download assets needed for implementation
 
-5. "What are the latest comments on this design file?"
+5. "What are the latest comments on https://www.figma.com/file/ABC123def456/design-system?"
    → Check for recent feedback or changes
 
 6. "Show me issue #1234"
    → Read development requirements and acceptance criteria
 
-7. "Export the error state icons for the form components"
+7. "Export the error state icons from file key ABC123def456 for the form components"
    → Get specific assets for error handling
 ```
 
@@ -203,16 +210,16 @@ This section provides real-world examples and common workflows using the MCP ser
 **Scenario:** Updating and auditing the design system
 
 ```bash
-1. "Get all design tokens from the main design system file as JSON"
+1. "Get all design tokens from https://www.figma.com/file/ABC123def456/design-system as JSON"
    → Extract complete token system for analysis
 
-2. "What component variations exist for buttons?"
+2. "What component variations exist for buttons in file key ABC123def456?"
    → Audit component library completeness
 
-3. "Search for authentication-related components"
+3. "Search for authentication-related components in https://www.figma.com/file/ABC123def456/design-system"
    → Find specific use case components
 
-4. "Export all brand assets as PNG files"
+4. "Export all brand assets from https://www.figma.com/file/BRA456brand789/brand-assets as PNG files"
    → Update marketing and documentation materials
 
 5. "Find GitHub issues labeled 'design-system'"
@@ -490,8 +497,8 @@ Context about token refresh
 ```bash
 1. "Read the feature specification at [Google Doc URL]"
 2. "Search for 'requirements' in the specification"
-3. "Get design tokens from Figma file design-system as CSS variables"
-4. "Export component assets from Figma file design-system"
+3. "Get design tokens from https://www.figma.com/file/ABC123def456/design-system as CSS variables"
+4. "Export component assets from file key ABC123def456"
 5. "Find GitHub issues related to this feature"
 6. "Get details on the implementation PR"
 ```
@@ -499,11 +506,11 @@ Context about token refresh
 **Design System Update:**
 
 ```bash
-1. "Get all design tokens from Figma file design-system as JSON"
+1. "Get all design tokens from https://www.figma.com/file/ABC123def456/design-system as JSON"
 2. "Read the design system documentation at [Google Doc URL]"
 3. "Search for 'migration guide' in the documentation"
 4. "Find GitHub issues labeled 'design-system'"
-5. "Export updated brand assets from Figma file brand-kit"
+5. "Export updated brand assets from https://www.figma.com/file/BRA456brand789/brand-kit"
 6. "Check recent PRs that update design tokens"
 ```
 

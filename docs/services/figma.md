@@ -117,6 +117,14 @@ DEFAULT_FIGMA_PROJECT_ID=your_project_id
 
 ## 🚀 Usage Examples
 
+**Important:** All Figma operations require either:
+
+- The full Figma URL: `https://www.figma.com/design/ABC123def456/file-name` (query parameters are ignored)
+- Just the design ID: `ABC123def456` (the part after `/design/` in the URL)
+
+**Example:** From `https://www.figma.com/design/SquElvNorSTJOTV1I7oYAq/Setup-flow-refresh?node-id=0-1&p=f&m=dev`
+→ Use either the full URL or just `SquElvNorSTJOTV1I7oYAq`
+
 ### Getting Design Specifications
 
 ```bash
@@ -128,7 +136,7 @@ get_design_tokens with:
 
 # Find all button components
 get_figma_components with:
-- file_key: "design-system-key"
+- file_key: "ABC123def456"
 - component_type: "COMPONENT"
 - search_term: "button"
 ```
@@ -137,11 +145,11 @@ get_figma_components with:
 
 Instead of technical tool calls, you can use natural language:
 
-- "What are the brand colors from this Figma file: https://www.figma.com/file/ABC123/design-system"
-- "Export all icons from the UI kit as SVG files"
-- "Show me the latest comments on the checkout flow design"
-- "What components are available in the design system?"
-- "Get typography tokens as SCSS variables"
+- "What are the brand colors from this Figma file: https://www.figma.com/design/ABC123def456/design-system"
+- "Export all icons from https://www.figma.com/design/UIK789xyz456/UI-kit as SVG files"
+- "Show me the latest comments on https://www.figma.com/design/CHE789checkout456/checkout-flow"
+- "What components are available in design ID ABC123def456?"
+- "Get typography tokens from https://www.figma.com/design/ABC123def456/design-system as SCSS variables"
 
 ### Extracting File Information
 
@@ -208,16 +216,16 @@ The server includes sophisticated design token extraction:
 
 ```bash
 # 1. Get design specifications
-"Get design tokens from the design system file as CSS custom properties"
+"Get design tokens from https://www.figma.com/file/ABC123def456/design-system as CSS custom properties"
 
 # 2. Find component specifications
-"What are the button component variations and their specifications?"
+"What are the button component variations in file key ABC123def456 and their specifications?"
 
 # 3. Export needed assets
-"Export all icons from the icon library as SVG files"
+"Export all icons from https://www.figma.com/file/ICO789library456/icon-library as SVG files"
 
 # 4. Check for updates
-"Any new comments on the feature design file?"
+"Any new comments on https://www.figma.com/file/FEA456feature789/feature-designs?"
 ```
 
 ### Design System Management
@@ -239,13 +247,13 @@ get_figma_components with:
 
 ```bash
 # Check latest feedback
-"Show me recent comments on the checkout flow design"
+"Show me recent comments on https://www.figma.com/design/CHE789checkout456/checkout-flow"
 
 # Verify design elements
-"Search for payment button components in the design file"
+"Search for payment button components in design ID CHE789checkout456"
 
 # Get specifications for implementation
-"What are the exact color values for the error states?"
+"What are the exact color values for the error states in https://www.figma.com/file/CHE789checkout456/checkout-flow?"
 ```
 
 ## 🚨 Troubleshooting
