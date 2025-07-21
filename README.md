@@ -105,6 +105,15 @@ Instead of technical syntax, use natural language:
 - "Search for 'authentication' in that document"
 - "What's the metadata for this Google Doc?"
 
+**Figma:**
+
+- "Get design tokens from https://www.figma.com/design/ABC123/design-system as CSS"
+- "Export all icons from this Figma file as SVG files"
+- "What components are available in design ID ABC123def456?"
+- "Show me the latest comments on https://www.figma.com/design/XYZ789/feature-designs"
+- "Search for navigation components in file key ABC123def456"
+- "Get typography tokens from this design system as SCSS variables"
+
 ## 📚 Documentation
 
 ### Setup & Configuration
