@@ -33,6 +33,20 @@ Read and search Google Docs, with extensible architecture for Sheets, Gmail, and
 
 **Planned:** Google Sheets, Gmail, Google Drive integration
 
+### 🎨 Figma MCP Server
+
+Bridge design and development workflows with comprehensive Figma integration.
+
+**Features:**
+
+- **Design Token Extraction**: Colors, typography, spacing in CSS/SCSS/JSON formats
+- **Component Discovery**: Find reusable components and design patterns
+- **Asset Export**: Download icons, images, and design assets as SVG/PNG
+- **Design File Analysis**: Read file structure, comments, and layer information
+- **Multi-Format Output**: Structured data optimized for development handoff
+
+**Tools:** `get_figma_file`, `get_figma_comments`, `search_figma_layers`, `get_figma_components`, `get_design_tokens`, `export_figma_assets`
+
 ## 🚀 Quick Start
 
 ### 1. Install
@@ -68,6 +82,13 @@ Restart Cursor completely for MCP servers to load.
 - "Read the design doc at https://docs.google.com/document/d/YOUR_DOCUMENT_ID/"
 - "Search for 'authentication' in that document"
 
+**Figma (requires authentication):**
+
+- "Get design tokens from https://www.figma.com/design/ABC123/design-system as CSS"
+- "Export all icons from this Figma file as SVG"
+- "What components are available in design ID ABC123def456?"
+- "Show me the latest comments on this Figma design"
+
 ## 💬 Natural Language Usage
 
 Instead of technical syntax, use natural language:
@@ -100,6 +121,7 @@ Instead of technical syntax, use natural language:
 
 - **[GitHub Server](docs/services/github.md)** - GitHub-specific features and setup
 - **[Google Workspace Server](docs/services/google-workspace.md)** - Google Workspace features and authentication
+- **[Figma Server](docs/services/figma.md)** - Figma integration, design tokens, and asset export
 
 ## 🔧 Configuration Reference
 
@@ -123,6 +145,15 @@ Instead of technical syntax, use natural language:
       "env": {
         "GOOGLE_SERVICE_ACCOUNT_FILE": "/path/to/service-account.json"
       }
+    },
+    "figma": {
+      "command": "node",
+      "args": ["/path/to/mcp-dev-workflow/servers/figma/index.js"],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "figd_your_token_here",
+        "DEFAULT_FIGMA_TEAM_ID": "your_team_id",
+        "DEFAULT_FIGMA_PROJECT_ID": "your_project_id"
+      }
     }
   }
 }
@@ -140,6 +171,11 @@ Instead of technical syntax, use natural language:
 - **OAuth2** (personal): `npm run auth:google`
 - **Service Account** (teams): Set `GOOGLE_SERVICE_ACCOUNT_FILE`
 
+**Figma (Required):**
+
+- **Personal Access Token**: Generate in Figma Settings → Personal Access Tokens
+- **Set Token**: Add `FIGMA_ACCESS_TOKEN` to `.env`
+
 See the [Setup Guide](docs/setup/) for detailed authentication instructions.
 
 ## 🛠️ Development
@@ -150,6 +186,7 @@ See the [Setup Guide](docs/setup/) for detailed authentication instructions.
 # Test individual servers
 npm run start:github
 npm run start:google-workspace
+npm run start:figma
 
 # Set up Google authentication
 npm run auth:google
@@ -202,6 +239,11 @@ Each server follows a modular pattern for easy extension and maintenance.
 
 - Run `npm run auth:google` for OAuth2 setup
 - Or set `GOOGLE_SERVICE_ACCOUNT_FILE` for Service Account
+
+**Figma authentication:**
+
+- Generate Personal Access Token in Figma Settings
+- Add `FIGMA_ACCESS_TOKEN` to `.env` file
 
 See the [Setup Guide](docs/setup/README.md#troubleshooting) for detailed troubleshooting.
 
