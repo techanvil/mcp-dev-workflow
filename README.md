@@ -266,7 +266,7 @@ See the [Setup Guide](docs/setup/README.md#troubleshooting) for detailed trouble
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+Apache License 2.0 - see [LICENSE](LICENSE) file for details.
 
 ---
 
