@@ -217,7 +217,7 @@ See existing servers for implementation patterns.
 
 ```
 mcp-dev-workflow/
-├── docs/                     # Documentation
+├── docs/                    # Documentation
 │   ├── setup/               # Setup & configuration guides
 │   ├── usage/               # Usage patterns & commands
 │   └── examples/            # Real-world workflows
@@ -227,7 +227,7 @@ mcp-dev-workflow/
 │       ├── modules/         # Service-specific modules
 │       └── utils/           # Shared utilities
 ├── cursor-mcp-config.json   # Ready-to-use Cursor configuration
-└── package.json            # Dependencies & scripts
+└── package.json             # Dependencies & scripts
 ```
 
 Each server follows a modular pattern for easy extension and maintenance.
